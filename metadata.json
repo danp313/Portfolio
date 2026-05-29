@@ -1,0 +1,6 @@
+{
+  "name": "Video Editing Portfolio",
+  "description": "A clean, responsive, and minimalist video editing portfolio website featuring a dynamic work grid, metric stats, logo ticker, custom filters, and client reviews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
