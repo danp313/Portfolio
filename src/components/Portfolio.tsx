@@ -3,29 +3,43 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { portfolioVideos } from '../data';
 import { VideoItem } from '../types';
-import { Play, Film, Smartphone, Gamepad, Compass, Trash2, Check, RefreshCw, ChevronDown } from 'lucide-react';
+import { Play } from 'lucide-react';
 import ScrollFadeIn from './ScrollFadeIn';
 
 export default function Portfolio() {
-  // State for concurrent AND filters - format is strictly 'short' or 'long'
-  const [typeFilter, setTypeFilter] = useState<'long' | 'short'>('short');
-  const [nicheFilter, setNicheFilter] = useState<'all' | 'commentary' | 'motivational' | 'fitness' | 'streamers' | 'documentary'>('all');
+  // State to track the currently playing video id (inline player)
+  const [activePlayingId, setActivePlayingId] = useState<string | null>(null);
 
-  // Filter video list based on AND logical grouping
-  const filteredVideos = portfolioVideos.filter((video) => {
-    const matchesType = video.type === typeFilter;
-    const matchesNiche = nicheFilter === 'all' || video.niche === nicheFilter;
-    return matchesType && matchesNiche;
-  });
+  // Dynamic streamable thumbnails
+  const [streamableThumbs, setStreamableThumbs] = useState<Record<string, string>>({});
 
-  // Helper to reset all filters
-  const resetFilters = () => {
-    setTypeFilter('short');
-    setNicheFilter('all');
-  };
+  // Dynamic oembed hydration for CORS-safe thumbnail retrieval
+  useEffect(() => {
+    portfolioVideos.forEach((video) => {
+      if (video.url.includes('streamable.com') && !streamableThumbs[video.id]) {
+        const match = video.url.match(/streamable\.com\/(?:e\/)?([a-zA-Z0-9]+)/);
+        if (match) {
+          const streamableId = match[1];
+          fetch(`https://api.streamable.com/oembed.json?url=https://streamable.com/${streamableId}`)
+            .then((res) => res.json())
+            .then((data) => {
+              if (data && data.thumbnail_url) {
+                const thumbUrl = data.thumbnail_url.startsWith('//')
+                  ? 'https:' + data.thumbnail_url
+                  : data.thumbnail_url;
+                setStreamableThumbs((prev) => ({ ...prev, [video.id]: thumbUrl }));
+              }
+            })
+            .catch((err) => {
+              console.warn('Silent fallback: dynamic streamable thumbnail error:', err);
+            });
+        }
+      }
+    });
+  }, []);
 
   /**
    * Generates a beautiful video timeline editor placeholder thumbnail
@@ -34,12 +48,12 @@ export default function Portfolio() {
    */
   const renderPlaceholderThumbnail = (video: VideoItem) => {
     const isLongForm = video.type === 'long';
-    const isGaming = video.niche === 'gaming';
+    const isGaming = video.niche === 'streamers';
 
     return (
       <div
-        id={`thumb-wrapper-${video.id}`}
-        className="w-full h-full relative bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden flex flex-col justify-between p-4 font-mono group-hover:scale-105 transition-transform duration-500"
+         id={`thumb-wrapper-${video.id}`}
+         className="w-full h-full relative bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden flex flex-col justify-between p-4 font-mono"
       >
         {/* Editing Grid overlay */}
         <div className="absolute inset-0 border-[0.5px] border-white/5 pointer-events-none" />
@@ -79,200 +93,258 @@ export default function Portfolio() {
     );
   };
 
+  const [activeFormat, setActiveFormat] = useState<'long' | 'short'>('long');
+
+  const currentVideos = portfolioVideos.filter((v) => v.type === activeFormat);
+  const businessVideos = currentVideos.filter((v) => v.niche === 'business');
+  const streamersVideos = currentVideos.filter((v) => v.niche === 'streamers');
+  const commentaryVideos = currentVideos.filter((v) => v.niche === 'commentary');
+  const podcastVideos = currentVideos.filter((v) => v.niche === 'podcast');
+  const camsVideos = currentVideos.filter((v) => v.niche === 'cams');
+
+  const renderVideoCard = (video: VideoItem, index: number) => {
+    const isLongForm = video.type === 'long';
+    const selectedThumb = streamableThumbs[video.id] || video.thumb;
+    return (
+      <ScrollFadeIn
+        key={video.id}
+        delay={index * 80}
+        className="bg-transparent overflow-hidden group relative flex flex-col"
+      >
+        {/* The video aspect ratios wrapper / click handler */}
+        <div
+          onClick={() => {
+            setActivePlayingId(video.id);
+          }}
+          className="relative overflow-hidden w-full rounded-2xl bg-gray-900 border border-gray-200/5 shadow-xs cursor-pointer"
+          style={{ aspectRatio: isLongForm ? '16/9' : '9/16' }}
+        >
+          {activePlayingId === video.id ? (
+            video.url.includes('streamable.com') ? (
+              (() => {
+                const streamableMatch = video.url.match(/streamable\.com\/(?:e\/)?([a-zA-Z0-9]+)/);
+                const streamableId = streamableMatch ? streamableMatch[1] : '';
+                return (
+                  <iframe
+                    src={`https://streamable.com/e/${streamableId}?loop=0&autoplay=1`}
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                    className="w-full h-full border-none rounded-2xl absolute inset-0 bg-black/50"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                );
+              })()
+            ) : (
+              (() => {
+                // Handle other urls (like youtube) inline
+                let embedUrl = video.url;
+                if (video.url.includes('youtube.com/shorts/')) {
+                  const ytMatch = video.url.match(/shorts\/([a-zA-Z0-9_-]+)/);
+                  const ytId = ytMatch ? ytMatch[1] : '';
+                  embedUrl = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+                } else if (video.url.includes('youtube.com') || video.url.includes('youtu.be')) {
+                  const ytMatch = video.url.match(/(?:v=|embed\/|watch\?v=)([a-zA-Z0-9_-]+)/);
+                  const ytId = ytMatch ? ytMatch[1] : '';
+                  embedUrl = `https://www.youtube.com/embed/${ytId}?autoplay=1`;
+                }
+                return (
+                  <iframe
+                    src={embedUrl}
+                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                    allowFullScreen
+                    className="w-full h-full border-none rounded-2xl absolute inset-0 bg-black"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                );
+              })()
+            )
+          ) : (
+            <>
+              {/* Render Image or Fallback */}
+              {selectedThumb ? (
+                <div className="w-full h-full bg-gray-900 overflow-hidden relative">
+                  <img
+                    src={selectedThumb}
+                    alt={video.title}
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ) : (
+                renderPlaceholderThumbnail(video)
+              )}
+
+              {/* Hover state Play Button overlay */}
+              <div id={`hover-overlay-${video.id}`} className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/95 hover:bg-youtube text-secondary-dark hover:text-white rounded-full flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
+                  <Play className="w-6 h-6 fill-current translate-x-[2px]" />
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Info BELOW the video card with larger title */}
+        <div className="mt-3.5 flex flex-col items-start text-left">
+          <h3
+            id={`video-title-${video.id}`}
+            className="font-sans font-extrabold text-secondary-dark text-base sm:text-lg md:text-xl leading-snug tracking-tight group-hover:text-youtube transition-colors duration-300"
+          >
+            {video.title}
+          </h3>
+        </div>
+      </ScrollFadeIn>
+    );
+  };
+
   return (
     <section id="portfolio" className="py-24 px-4 md:px-8 bg-transparent scroll-mt-10">
       <div className="container max-w-6xl mx-auto">
         
         {/* Section Heading Card - Center Alignment */}
         <ScrollFadeIn delay={0}>
-          <div className="flex flex-col items-center justify-center text-center mb-12">
-            <h2 id="portfolio-title" className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark tracking-tight leading-none cursor-default select-none">
+          <div className="flex flex-col items-center justify-center text-center mb-8 relative w-full max-w-4xl mx-auto px-4">
+            <span className="relative z-10 text-[10.5px] font-mono font-bold text-youtube tracking-widest uppercase mb-3.5 select-none md:scale-105">
+              Explore Portfolio
+            </span>
+            <h2 id="portfolio-title" className="relative z-10 px-6 text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark tracking-tight leading-none cursor-default select-none">
               My Work
             </h2>
           </div>
         </ScrollFadeIn>
 
-        {/* Clean, Unified and Spaced Filter Panel with Adjacent Reset Button */}
-        <ScrollFadeIn delay={100} className="mb-12 max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-5 sm:p-6 bg-white/70 backdrop-blur-md rounded-2xl border border-gray-200/40 shadow-xs">
-            
-            <div id="filter-bar" className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 w-full md:w-auto">
-              
-              {/* Filter Group 1: Format Type */}
-              <div id="fgroup-type" className="flex items-center gap-3 w-full sm:w-auto">
-                <span className="text-[11px] font-mono font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5 whitespace-nowrap">
-                  <Film className="w-3.5 h-3.5 text-gray-400" />
-                  Format
-                </span>
-                <div className="flex bg-gray-100/80 p-0.5 rounded-lg border border-gray-200/40 w-full sm:w-auto">
-                  {(['long', 'short'] as const).map((type) => {
-                    const isActive = typeFilter === type;
-                    return (
-                      <button
-                        id={`type-btn-${type}`}
-                        key={type}
-                        onClick={() => setTypeFilter(type)}
-                        className={`px-3.5 py-1.5 text-xs font-semibold rounded-md transition-all duration-300 cursor-pointer ${
-                          isActive
-                            ? 'bg-white text-youtube shadow-xs border border-gray-200/30 font-bold'
-                            : 'text-gray-500 hover:text-gray-800 border border-transparent hover:bg-gray-200/30'
-                        }`}
-                      >
-                        {type === 'long' ? 'Long' : 'Short'}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Vertical divider on screens wider than mobile but mobile view collapses */}
-              <div className="hidden sm:block w-[1px] h-6 bg-gray-200" />
-
-              {/* Filter Group 2: Niche */}
-              <div id="fgroup-niche" className="flex items-center gap-3 w-full sm:w-auto">
-                <span className="text-[11px] font-mono font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5 whitespace-nowrap">
-                  <Gamepad className="w-3.5 h-3.5 text-gray-400" />
-                  Niche
-                </span>
-                <div className="relative w-full sm:w-auto select-none">
-                  <select
-                    id="niche-select"
-                    value={nicheFilter}
-                    onChange={(e) => setNicheFilter(e.target.value as any)}
-                    className="w-full sm:w-48 bg-white hover:bg-gray-50 border border-gray-250/30 text-secondary-dark text-xs font-bold px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer outline-none focus:border-youtube/40 focus:ring-2 focus:ring-youtube/15 appearance-none pr-10 font-sans shadow-xs"
-                  >
-                    <option value="all">⚡ All Niches</option>
-                    <option value="commentary">🎬 Commentary</option>
-                    <option value="motivational">🔥 Motivational</option>
-                    <option value="fitness">💪 Fitness</option>
-                    <option value="streamers">🎮 Streamers</option>
-                    <option value="documentary">📖 Documentary</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-youtube">
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Quick Reset Active Filters Adjacent to Controls */}
-            <div className="w-full md:w-auto flex justify-center md:justify-end border-t md:border-t-0 pt-4 md:pt-0 border-gray-150">
-              <button
-                id="filter-reset-btn"
-                onClick={resetFilters}
-                disabled={typeFilter === 'short' && nicheFilter === 'all'}
-                className={`w-full md:w-auto inline-flex items-center justify-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider py-2.5 px-4 rounded-xl transition-all duration-300 cursor-pointer border ${
-                  (typeFilter !== 'short' || nicheFilter !== 'all')
-                    ? 'bg-secondary-dark hover:bg-youtube text-white border-secondary-dark hover:border-youtube shadow-xs'
-                    : 'bg-gray-100 border-gray-250/20 text-gray-400 cursor-not-allowed opacity-50'
-                }`}
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-                Reset Filters
-              </button>
-            </div>
-
+        {/* Format Selector Pill Buttons */}
+        <ScrollFadeIn delay={80}>
+          <div className="flex justify-center items-center gap-3 mb-16 select-none">
+            <button
+              onClick={() => {
+                setActiveFormat('long');
+                setActivePlayingId(null);
+              }}
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                activeFormat === 'long'
+                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
+                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
+              }`}
+            >
+              Long Form
+            </button>
+            <button
+              onClick={() => {
+                setActiveFormat('short');
+                setActivePlayingId(null);
+              }}
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                activeFormat === 'short'
+                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
+                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
+              }`}
+            >
+              Short Form
+            </button>
           </div>
         </ScrollFadeIn>
 
-        {/* Video Grid responsive layout */}
-        {filteredVideos.length > 0 ? (
-          <div 
-            id="portfolio-grid" 
-            className={`grid gap-4 sm:gap-6 items-start ${
-              typeFilter === 'long'
-                ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
-                : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-4'
-            }`}
-          >
-            {filteredVideos.map((video, index) => {
-              const isLongForm = video.type === 'long';
-              return (
-                <ScrollFadeIn
-                  key={video.id}
-                  delay={index * 80}
-                  className="bg-gray-900 rounded-2xl border border-gray-200/5 shadow-xs hover:shadow-xl transition-all overflow-hidden group relative"
-                >
-                  {/* Link wrapper around entire aspect card */}
-                  <a
-                    id={`video-link-${video.id}`}
-                    href={video.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative overflow-hidden block w-full h-full outline-none"
-                    style={{ aspectRatio: isLongForm ? '16/9' : '9/16' }}
-                  >
-                    
-                    {/* Render Image or Fallback */}
-                    {video.thumb ? (
-                      <div className="w-full h-full bg-gray-900 overflow-hidden relative group-hover:scale-105 transition-transform duration-500">
-                        <img 
-                          src={video.thumb} 
-                          alt={video.title} 
-                          className="w-full h-full object-cover"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-                    ) : (
-                      renderPlaceholderThumbnail(video)
-                    )}
-
-                    {/* Gradient overlay for text contrast and depth */}
-                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10 pointer-events-none" />
-
-                    {/* Integrated Details inside aspect container */}
-                    <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 z-15 flex flex-col items-start text-left pointer-events-none">
-                      
-                      {/* Video Title */}
-                      <h3 
-                        id={`video-title-${video.id}`} 
-                        className="font-sans font-bold text-white text-xs sm:text-xs md:text-sm leading-snug drop-shadow-[0_1.5px_2.5px_rgba(0,0,0,0.9)] line-clamp-2 sm:line-clamp-3 select-none"
-                      >
-                        {video.title}
-                      </h3>
-
-                      {/* Views Count */}
-                      {video.views && (
-                        <span 
-                          id={`video-stat-views-${video.id}`} 
-                          className="text-[10px] font-mono font-medium text-gray-200 mt-1 sm:mt-1.5 drop-shadow-[0_1px_1.5px_rgba(0,0,0,0.85)] select-none"
-                        >
-                          {video.views}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Hover state Play Button overlay */}
-                    <div id={`hover-overlay-${video.id}`} className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
-                      <div className="w-11 h-11 sm:w-14 sm:h-14 bg-white/95 hover:bg-youtube text-secondary-dark hover:text-white rounded-full flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
-                        <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-current translate-x-[2px]" />
-                      </div>
-                    </div>
-
-                  </a>
-                </ScrollFadeIn>
-              );
-            })}
-          </div>
-        ) : (
-          /* Empty Search filter states */
-          <ScrollFadeIn delay={0}>
-            <div id="no-results-panel" className="w-full py-16 flex flex-col items-center justify-center text-center bg-white/50 backdrop-blur-md rounded-2xl border border-gray-200/60 max-w-lg mx-auto">
-              <Trash2 className="w-12 h-12 text-gray-300 mb-4" />
-              <h3 id="no-results-title" className="text-lg font-bold text-gray-800">No projects match filters</h3>
-              <p className="text-sm text-gray-500 mt-1.5 px-6">
-                Try loosening your category rules to view the other uploaded cinematic sequences.
-              </p>
-              <button
-                id="no-results-reset-btn"
-                onClick={resetFilters}
-                className="mt-5 text-xs font-semibold bg-secondary-dark hover:bg-youtube text-white py-2 px-4 rounded-lg shadow-sm transition-all cursor-pointer"
+        {activeFormat === 'long' ? (
+          <>
+            {/* Business Niche Section */}
+            <div className="mb-14">
+              <ScrollFadeIn delay={100}>
+                <div className="text-left w-full mb-6 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-youtube rounded-full" />
+                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
+                    Business
+                  </span>
+                </div>
+              </ScrollFadeIn>
+              
+              <div 
+                id="portfolio-grid-business" 
+                className="grid gap-6 items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
               >
-                Reset Filters
-              </button>
+                {businessVideos.map((video, index) => renderVideoCard(video, index))}
+              </div>
             </div>
-          </ScrollFadeIn>
+
+            {/* Streamers Niche Section */}
+            <div className="mb-6">
+              <ScrollFadeIn delay={150}>
+                <div className="text-left w-full mb-6 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-youtube rounded-full animate-pulse" />
+                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
+                    Streamers
+                  </span>
+                </div>
+              </ScrollFadeIn>
+              
+              <div 
+                id="portfolio-grid-streamer" 
+                className="grid gap-6 items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+              >
+                {streamersVideos.map((video, index) => renderVideoCard(video, index))}
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Short Form Sections Container - shrunk to ~80% width to make physical video sizes smaller */
+          <div className="max-w-[920px] mx-auto">
+            {/* Podcast Niche Section */}
+            <div className="mb-14">
+              <ScrollFadeIn delay={100}>
+                <div className="text-left w-full mb-6 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-youtube rounded-full animate-pulse" />
+                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
+                    Podcast
+                  </span>
+                </div>
+              </ScrollFadeIn>
+              
+              <div 
+                id="portfolio-grid-podcast" 
+                className="grid gap-5 items-start grid-cols-2 md:grid-cols-4"
+              >
+                {podcastVideos.map((video, index) => renderVideoCard(video, index))}
+              </div>
+            </div>
+
+            {/* Cams Niche Section */}
+            <div className="mb-14">
+              <ScrollFadeIn delay={150}>
+                <div className="text-left w-full mb-6 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-youtube rounded-full" />
+                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
+                    Cams
+                  </span>
+                </div>
+              </ScrollFadeIn>
+              
+              <div 
+                id="portfolio-grid-cams" 
+                className="grid gap-5 items-start grid-cols-2 md:grid-cols-4"
+              >
+                {camsVideos.map((video, index) => renderVideoCard(video, index))}
+              </div>
+            </div>
+
+            {/* Commentary Niche Section */}
+            <div className="mb-6">
+              <ScrollFadeIn delay={200}>
+                <div className="text-left w-full mb-6 flex items-center gap-2">
+                  <div className="w-2 h-2 bg-youtube rounded-full" />
+                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
+                    Commentary
+                  </span>
+                </div>
+              </ScrollFadeIn>
+              
+              <div 
+                id="portfolio-grid-commentary" 
+                className="grid gap-5 items-start grid-cols-2 md:grid-cols-4"
+              >
+                {commentaryVideos.map((video, index) => renderVideoCard(video, index))}
+              </div>
+            </div>
+          </div>
         )}
 
       </div>

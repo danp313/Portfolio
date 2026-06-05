@@ -26,11 +26,7 @@ export default function Footer({ onDiscordClick }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="relative mt-20 bg-white border-t-2 border-youtube pt-16 pb-8 px-4 md:px-8">
-      
-      {/* Decorative background shape */}
-      <div className="absolute top-0 right-1/4 w-60 h-60 bg-youtube/3 rounded-full blur-[80px] pointer-events-none" />
-
+    <footer id="contact" className="relative mt-20 bg-transparent pt-16 pb-8 px-4 md:px-8">
       <div className="container max-w-6xl mx-auto">
         
         {/* Call to action contact prompt */}

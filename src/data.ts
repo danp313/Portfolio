@@ -38,301 +38,202 @@ import { VideoItem, StatItem, PartnerBrand, ReviewItem } from './types';
  */
 export const portfolioVideos: VideoItem[] = [
   {
-    id: 'vid-1',
-    title: 'The Best Dad 💖',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'commentary',
-    url: 'https://www.youtube.com/shorts/jKTOVwqCgT8',
-    thumb: 'https://i.ytimg.com/vi/jKTOVwqCgT8/hqdefault.jpg',
-    views: '36M views',
-    duration: '0:52'
-  },
-  {
-    id: 'vid-5',
-    title: 'GET UP AND GRIND - Motivational Speech',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/shorts/5f7E4DQG6kk',
-    thumb: 'https://i.ytimg.com/vi/5f7E4DQG6kk/hqdefault.jpg',
-    views: '13M views',
-    duration: '0:52'
-  },
-  {
-    id: 'vid-13',
-    title: 'She Used 100% Of Her Brain...(@rosivaldofreitass)',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'fitness',
-    url: 'https://www.youtube.com/shorts/X1V6sYKeKV8',
-    thumb: 'https://i.ytimg.com/vi/X1V6sYKeKV8/hqdefault.jpg',
-    views: '7.5M views',
-    duration: '0:58'
-  },
-  {
     id: 'vid-17',
-    title: '10 Times iShowSpeed Was Almost KILLED',
+    title: '20 Years of No-BS SaaS Sales Advice in 7 Minutes',
     type: 'long',
     platform: 'youtube',
-    niche: 'streamers',
-    url: 'https://www.youtube.com/watch?v=JN2dPeWup4s',
-    thumb: 'https://i.ytimg.com/vi/JN2dPeWup4s/hqdefault.jpg',
-    views: '6.9M views',
-    duration: '12:15'
-  },
-  {
-    id: 'vid-3',
-    title: 'The World Gymnastics Champion 🥇',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'commentary',
-    url: 'https://www.youtube.com/shorts/5lAkGGtC9gA',
-    thumb: 'https://i.ytimg.com/vi/5lAkGGtC9gA/hqdefault.jpg',
-    views: '5.5M views',
-    duration: '0:50'
+    niche: 'business',
+    url: 'https://streamable.com/e/1eiasq?loop=0',
+    thumb: 'https://cdn-cf-east.streamable.com/image/upload-1eiasq-4ca749bae0aa1cdf37428169242607.jpg?Expires=1780368720&Signature=W7JBg7Od47lbmQ5RSzPePcU9J5YvNjxQiF6nfkzzB~nUaFVwp5q3muJdi9uQFOpha2O~VSYHfzYFgwTg9atGemYQnLaiIhirzOY2kbsSYuIzdGCPWI27iYzf6tEgY-aS8AtlJgEMGxPkVWIuflKtau90Y0J7wuoqdY0Nt2fHGVlWb7QPIBZCzNeJHt9kDx309WGdbGoYdQ-5ZqHPTYaFrVtdTfw62-lAHJfSPE5SH5iuCDL~wyKtcjO8yx-54Pcv9s5CU7Oqj6k1nP4LWH0krf9XMofSqLfB2u6loMb~5DJary-JpfwivbINF89LMCcY~AVUb5DBO0xm9O7kBstX8A__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
+    views: '4.5M views',
+    duration: '7:00'
   },
   {
     id: 'vid-24',
-    title: "The Untold Story Of The World's Greatest Prison Escapee",
+    title: "In 8 Minutes, You'll Understand Building The Best Product",
     type: 'long',
     platform: 'youtube',
-    niche: 'documentary',
-    url: 'https://www.youtube.com/watch?v=LpYPsCdZ1Uc',
-    thumb: 'https://i.ytimg.com/vi/LpYPsCdZ1Uc/hqdefault.jpg',
-    views: '4.7M views',
-    duration: '25:40'
-  },
-  {
-    id: 'vid-15',
-    title: 'How Is This Even Possible?🤔(@sbt)',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'fitness',
-    url: 'https://www.youtube.com/shorts/i768IdWZaM4',
-    thumb: 'https://i.ytimg.com/vi/i768IdWZaM4/hqdefault.jpg',
-    views: '4.3M views',
-    duration: '0:45'
-  },
-  {
-    id: 'vid-2',
-    title: 'This Girl Adopted a Dog but... 🐶',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'commentary',
-    url: 'https://www.youtube.com/shorts/Ja7neOJZg-k',
-    thumb: 'https://i.ytimg.com/vi/Ja7neOJZg-k/hqdefault.jpg',
-    views: '2.9M views',
-    duration: '0:55'
+    niche: 'business',
+    url: 'https://streamable.com/e/mm6br5?loop=0',
+    thumb: 'https://cdn-cf-east.streamable.com/image/upload-mm6br5-59770f4fc168923e72da1ecb1810f0.jpg?Expires=1780368720&Signature=RtBNgK~Uk9-MyXLyajmO3OM-y1W9ztKTPzNNyUM2u4Xf2I9pmhaqBYiCvXopCctw~KVYRkQB7bM5TniscrJCGIEqbCTXbMqi7Iyz19nigdzQ0h1XIwG9BiU8Z8ASQS6FFQ0T7~Iuc2M6UrsWMEkk9dYARDOWIFrVKrg6KrSa1IIz6DW0uveiq1g6GHH2NI2Yy~4S8x-tDnkIEBklqmB5dEExBXYullfYGBM7IwJLhPZyUgiJmhTv~sjJRYYoRvwQHYqNFJKCtmEOiBYCQvxkxVaoyE5nqr50eDD8uzsg-W-zgPsYLlJJH~PbdIrM1YgiaZ~nB1Q9t3ij8JUFw8bSkQ__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
+    views: '3.8M views',
+    duration: '8:00'
   },
   {
     id: 'vid-9',
-    title: "DON'T GIVE UP - Motivational Speech",
+    title: 'AI Changed SaaS (And Nobody Even Realizes)',
     type: 'long',
     platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/watch?v=nKpxRwCGBGU',
-    thumb: 'https://i.ytimg.com/vi/nKpxRwCGBGU/hqdefault.jpg',
-    views: '2.7M views',
-    duration: '10:15'
+    niche: 'business',
+    url: 'https://streamable.com/e/cdhovx?loop=0',
+    thumb: 'https://cdn-cf-east.streamable.com/image/upload-cdhovx-96a31696206a25a8c6fe586408994b.jpg?Expires=1780368720&Signature=DMMAY--sMd1GZ~96M6xCOKhhJJSqkW0AiEnwHlRhgHEM1~7koy2~YOU5r5ES-~sfVl7ZEyzNyMSY37QR6pql0ZztZ-vMy4DIEahlq9DMCr6g7vVqeKgJqHbgGFZ2xKO4xos2c~RpiCuie7Z9TWImYiP690ABOvg8SYfHE1YfGr2XBh~UVC~wbTG8Z66ESyfZi-~LB9dJAxwPmGNwFCmMyQoxCvPXee8WmlYdajGw7F2~qD2BFAfxLZtf0wcKGB7OfSTfYNmVS4uLFD5MQLv8CGrVvOkOpuycmXQtwzwQXOBwWuNdFAHoAzW60QA5KijMGsB9ht-iuSjLp1WRHf-kew__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
+    views: '2.5M views',
+    duration: '7:30'
   },
   {
-    id: 'vid-8',
-    title: 'NEVER GIVE UP - Motivational Speech',
-    type: 'short',
-    platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/shorts/H6dImOh3yBM',
-    thumb: 'https://i.ytimg.com/vi/H6dImOh3yBM/hqdefault.jpg',
-    views: '2.3M views',
-    duration: '0:50'
-  },
-  {
-    id: 'vid-14',
-    title: "He's Way Too Intimidating\uD83E\uDD76(@grekovalan)",
-    type: 'short',
-    platform: 'youtube',
-    niche: 'fitness',
-    url: 'https://www.youtube.com/shorts/LQrR9a5l0r8',
-    thumb: 'https://i.ytimg.com/vi/LQrR9a5l0r8/hqdefault.jpg',
-    views: '1.7M views',
-    duration: '0:50'
-  },
-  {
-    id: 'vid-20',
-    title: "Streamers Who Forgot They're Live",
+    id: 'vid-streamer-1',
+    title: '$1 VS $3,000,000 Things iShowSpeed Bought..',
     type: 'long',
     platform: 'youtube',
     niche: 'streamers',
-    url: 'https://www.youtube.com/watch?v=RsKpGPC5tjY',
-    thumb: 'https://i.ytimg.com/vi/RsKpGPC5tjY/hqdefault.jpg',
-    views: '1.6M views',
-    duration: '14:55'
+    url: 'https://streamable.com/e/znrr1c?loop=0',
+    thumb: '',
+    views: '5.2M views',
+    duration: '11:40'
   },
   {
-    id: 'vid-23',
-    title: "The Untold Story Of America's Greatest Car Thief",
+    id: 'vid-streamer-2',
+    title: 'Times Streamers Lost It On Their Managers',
     type: 'long',
     platform: 'youtube',
-    niche: 'documentary',
-    url: 'https://www.youtube.com/watch?v=TGL7zAp4fcE',
-    thumb: 'https://i.ytimg.com/vi/TGL7zAp4fcE/hqdefault.jpg',
-    views: '1.5M views',
-    duration: '18:30'
+    niche: 'streamers',
+    url: 'https://streamable.com/e/n4lcby?loop=0',
+    thumb: '',
+    views: '3.1M views',
+    duration: '9:25'
   },
   {
-    id: 'vid-26',
-    title: 'The Man Who Sold An Imaginary Airport For $242 Million',
+    id: 'vid-streamer-3',
+    title: 'Times Streamers Lost It On Their Assistants',
     type: 'long',
     platform: 'youtube',
-    niche: 'documentary',
-    url: 'https://www.youtube.com/watch?v=qarEt6NHL6w',
-    thumb: 'https://i.ytimg.com/vi/qarEt6NHL6w/hqdefault.jpg',
-    views: '1.5M views',
-    duration: '21:15'
+    niche: 'streamers',
+    url: 'https://streamable.com/e/ayg28e?loop=0',
+    thumb: '',
+    views: '2.8M views',
+    duration: '8:50'
   },
   {
-    id: 'vid-4',
-    title: 'This Guy Decided to Take Revenge but...',
+    id: 'vid-short-comm-1',
+    title: "The World's Rarest Car 🚗",
     type: 'short',
     platform: 'youtube',
     niche: 'commentary',
-    url: 'https://www.youtube.com/shorts/HdcBgJsvuJc',
-    thumb: 'https://i.ytimg.com/vi/HdcBgJsvuJc/hqdefault.jpg',
-    views: '1.2M views',
-    duration: '0:58'
+    url: 'https://streamable.com/e/4anzcv?loop=0',
+    thumb: '',
+    views: '4.2M views',
+    duration: '0:45'
   },
   {
-    id: 'vid-25',
-    title: 'The Man Who Fled in a Box from the Most Heavily Guarded Facility',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'documentary',
-    url: 'https://www.youtube.com/watch?v=2BRPV5ChS0c',
-    thumb: 'https://i.ytimg.com/vi/2BRPV5ChS0c/hqdefault.jpg',
-    views: '1M views',
-    duration: '19:10'
-  },
-  {
-    id: 'vid-27',
-    title: 'The HUNT for the Man Who Outran Every Cop',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'documentary',
-    url: 'https://www.youtube.com/watch?v=ky-sCxvimlg',
-    thumb: 'https://i.ytimg.com/vi/ky-sCxvimlg/hqdefault.jpg',
-    views: '1M views',
-    duration: '15:25'
-  },
-  {
-    id: 'vid-28',
-    title: "The HUNT For The World's Most Wanted Motorcycle Street Racer: GhostRider",
-    type: 'long',
-    platform: 'youtube',
-    niche: 'documentary',
-    url: 'https://www.youtube.com/watch?v=ClT0A8HAkAM',
-    thumb: 'https://i.ytimg.com/vi/ClT0A8HAkAM/hqdefault.jpg',
-    views: '970K views',
-    duration: '16:45'
-  },
-  {
-    id: 'vid-16',
-    title: 'Most Genuine Apology\uD83D\uDE02(@sv.league_official_th)',
+    id: 'vid-short-comm-2',
+    title: 'This Girl Has Created a Magnificent Invention ❤️',
     type: 'short',
     platform: 'youtube',
-    niche: 'fitness',
-    url: 'https://www.youtube.com/shorts/nasNtftQwK4',
-    thumb: 'https://i.ytimg.com/vi/nasNtftQwK4/hqdefault.jpg',
-    views: '900K views',
+    niche: 'commentary',
+    url: 'https://streamable.com/e/fvktze?loop=0',
+    thumb: '',
+    views: '2.9M views',
+    duration: '0:50'
+  },
+  {
+    id: 'vid-short-comm-3',
+    title: 'His Reaction Says It All 🥶',
+    type: 'short',
+    platform: 'youtube',
+    niche: 'commentary',
+    url: 'https://streamable.com/e/lyy3dt?loop=0',
+    thumb: '',
+    views: '3.1M views',
     duration: '0:35'
   },
   {
-    id: 'vid-18',
-    title: '10 MOST EMOTIONAL ISHOWSPEED MOMENTS',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'streamers',
-    url: 'https://www.youtube.com/watch?v=qL96jIAd-BU',
-    thumb: 'https://i.ytimg.com/vi/qL96jIAd-BU/hqdefault.jpg',
-    views: '819K views',
-    duration: '15:40'
-  },
-  {
-    id: 'vid-7',
-    title: 'CONTROL YOUR MIND - Motivational Speech',
+    id: 'vid-short-comm-4',
+    title: 'Should They Get Banned? 🤔',
     type: 'short',
     platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/shorts/-J8dBgLGXkk',
-    thumb: 'https://i.ytimg.com/vi/-J8dBgLGXkk/hqdefault.jpg',
-    views: '398K views',
-    duration: '0:55'
+    niche: 'commentary',
+    url: 'https://streamable.com/e/z20v4w?loop=0',
+    thumb: '',
+    views: '1.8M views',
+    duration: '0:48'
   },
   {
-    id: 'vid-10',
-    title: 'BELIEVE YOU CAN DO THIS - Motivational Speech',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/watch?v=AnoUBi9qZE8',
-    thumb: 'https://i.ytimg.com/vi/AnoUBi9qZE8/hqdefault.jpg',
-    views: '372K views',
-    duration: '8:40'
-  },
-  {
-    id: 'vid-22',
-    title: 'When Streamers Expose Their Entitled Parents',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'streamers',
-    url: 'https://www.youtube.com/watch?v=eAh4uC-hcxc',
-    thumb: 'https://i.ytimg.com/vi/eAh4uC-hcxc/hqdefault.jpg',
-    views: '310K views',
-    duration: '13:20'
-  },
-  {
-    id: 'vid-12',
-    title: 'GET UP AND GET IT DONE - Motivational Video',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/watch?v=6dtPka6xUSM',
-    thumb: 'https://i.ytimg.com/vi/6dtPka6xUSM/hqdefault.jpg',
-    views: '292K views',
-    duration: '7:50'
-  },
-  {
-    id: 'vid-19',
-    title: '12 Times iShowSpeed Fans Went Too Far..',
-    type: 'long',
-    platform: 'youtube',
-    niche: 'streamers',
-    url: 'https://www.youtube.com/watch?v=G0C8p109KfE',
-    thumb: 'https://i.ytimg.com/vi/G0C8p109KfE/hqdefault.jpg',
-    views: '192K views',
-    duration: '11:05'
-  },
-  {
-    id: 'vid-6',
-    title: 'DISCIPLINE YOUR MIND - Motivational Speech',
+    id: 'vid-short-pod-1',
+    title: 'Safest Home Defense Option - Delta Force Operator',
     type: 'short',
     platform: 'youtube',
-    niche: 'motivational',
-    url: 'https://www.youtube.com/shorts/xYeTfr53vvY',
-    thumb: 'https://i.ytimg.com/vi/xYeTfr53vvY/hqdefault.jpg',
-    views: '115K views',
+    niche: 'podcast',
+    url: 'https://streamable.com/e/xzri7r?loop=0',
+    thumb: '',
+    views: '2.4M views',
+    duration: '0:45'
+  },
+  {
+    id: 'vid-short-pod-2',
+    title: 'Most Lethal Dudes On Planet',
+    type: 'short',
+    platform: 'youtube',
+    niche: 'podcast',
+    url: 'https://streamable.com/e/kpxzf1?loop=0',
+    thumb: '',
+    views: '1.9M views',
+    duration: '0:52'
+  },
+  {
+    id: 'vid-short-pod-3',
+    title: 'Matthew Discovers The MIAMI Effect',
+    type: 'short',
+    platform: 'youtube',
+    niche: 'podcast',
+    url: 'https://streamable.com/e/wd7qzn?loop=0',
+    thumb: '',
+    views: '3.1M views',
+    duration: '0:40'
+  },
+  {
+    id: 'vid-short-pod-4',
+    title: "Europeans Don't Know HISTORY",
+    type: 'short',
+    platform: 'youtube',
+    niche: 'podcast',
+    url: 'https://streamable.com/e/bffl3f?loop=0',
+    thumb: '',
+    views: '4.5M views',
     duration: '0:58'
   },
   {
-    id: 'vid-21',
-    title: 'When AMP Collabs Went Completely Wrong',
-    type: 'long',
+    id: 'vid-short-cam-1',
+    title: 'Officers Respond To a Disturbing call!',
+    type: 'short',
     platform: 'youtube',
-    niche: 'streamers',
-    url: 'https://www.youtube.com/watch?v=9k9lsxfLfKQ',
-    thumb: 'https://i.ytimg.com/vi/9k9lsxfLfKQ/hqdefault.jpg',
-    views: '70K views',
-    duration: '8:50'
+    niche: 'cams',
+    url: 'https://streamable.com/e/c78zk6?loop=0',
+    thumb: '',
+    views: '5.1M views',
+    duration: '0:41'
+  },
+  {
+    id: 'vid-short-cam-2',
+    title: 'Officer Pulls Over Lil Baby!',
+    type: 'short',
+    platform: 'youtube',
+    niche: 'cams',
+    url: 'https://streamable.com/e/trhf8a?loop=0',
+    thumb: '',
+    views: '3.7M views',
+    duration: '0:50'
+  },
+  {
+    id: 'vid-short-cam-3',
+    title: 'This Baby Has Mastered Rage Baiting!',
+    type: 'short',
+    platform: 'youtube',
+    niche: 'cams',
+    url: 'https://streamable.com/e/toum4x?loop=0',
+    thumb: '',
+    views: '2.5M views',
+    duration: '0:38'
+  },
+  {
+    id: 'vid-short-cam-4',
+    title: 'His First Time Trick or Treating!',
+    type: 'short',
+    platform: 'youtube',
+    niche: 'cams',
+    url: 'https://streamable.com/e/f9yop7?loop=0',
+    thumb: '',
+    views: '1.2M views',
+    duration: '0:46'
   }
 ];
 
@@ -358,13 +259,6 @@ export const workedWithChannels: PartnerBrand[] = [
     channelUrl: 'https://www.youtube.com/@DenisBrem'
   },
   {
-    id: 'brand-2',
-    name: 'Ben Lionel Scott',
-    subscriberCount: '3.44M Subs',
-    avatarUrl: 'https://i.postimg.cc/Wz4Ddh24/benlionel.png',
-    channelUrl: 'https://www.youtube.com/@BenLionelScott'
-  },
-  {
     id: 'brand-3',
     name: 'Gainz',
     subscriberCount: '1.52M Subs',
@@ -379,11 +273,25 @@ export const workedWithChannels: PartnerBrand[] = [
     channelUrl: 'https://www.youtube.com/@StreamPhoenix'
   },
   {
-    id: 'brand-5',
-    name: 'Robbers IQ',
-    subscriberCount: '205K Subs',
-    avatarUrl: 'https://i.postimg.cc/sx2BMvVD/robbersiq.png',
-    channelUrl: 'https://www.youtube.com/@RobbersIQ'
+    id: 'brand-feasterr',
+    name: 'Feasterr',
+    subscriberCount: '56.9K Subs',
+    avatarUrl: 'https://i.postimg.cc/QxbVFT1Q/feasterr.jpg',
+    channelUrl: 'https://www.youtube.com/@feasterr'
+  },
+  {
+    id: 'brand-navyseal6',
+    name: 'NAVYSEAL6',
+    subscriberCount: '25.7K Subs',
+    avatarUrl: 'https://i.postimg.cc/Hs2jryXQ/NAVYSEAL6.jpg',
+    channelUrl: 'https://www.youtube.com/@navyseal6'
+  },
+  {
+    id: 'brand-microcrimes',
+    name: 'MicroCrimes',
+    subscriberCount: '63.4K Subs',
+    avatarUrl: 'https://i.postimg.cc/dtBDhyrG/Micro-Crimes.jpg',
+    channelUrl: 'https://www.youtube.com/@MicroCrimes'
   },
   {
     id: 'brand-6',
@@ -393,11 +301,25 @@ export const workedWithChannels: PartnerBrand[] = [
     channelUrl: 'https://www.youtube.com/@ConflextOfficial'
   },
   {
-    id: 'brand-7',
-    name: 'Speed Cartel',
-    subscriberCount: '15.8K Subs',
-    avatarUrl: 'https://i.postimg.cc/nz2jVvtC/speedcartel.png',
-    channelUrl: 'https://www.youtube.com/@speedcartel'
+    id: 'brand-8',
+    name: 'Ash Maurya',
+    subscriberCount: '105K Subs',
+    avatarUrl: 'https://i.ibb.co/ZRvKpJnF/Ash-Maurya.png',
+    channelUrl: 'https://www.youtube.com/@AshMaurya'
+  },
+  {
+    id: 'brand-9',
+    name: 'Adam Robinson',
+    subscriberCount: '9.4K Subs',
+    avatarUrl: 'https://i.ibb.co/cXkHTZyr/Adam-Robinson.png',
+    channelUrl: 'https://www.youtube.com/@retentionadam'
+  },
+  {
+    id: 'brand-10',
+    name: 'Scott Leese',
+    subscriberCount: '1.22K Subs',
+    avatarUrl: 'https://i.ibb.co/pBKFbv7C/The-Scott-Leese.png',
+    channelUrl: 'https://www.youtube.com/@thescottleese'
   }
 ];
 
@@ -405,14 +327,6 @@ export const workedWithChannels: PartnerBrand[] = [
  * Client Testimonials & Feedback Screenshots
  */
 export const clientReviews: ReviewItem[] = [
-  {
-    id: 'rev-1',
-    clientName: 'Ben Lionel Scott',
-    role: 'Motivational Creator (3.44M Subs)',
-    comment: 'Working with them elevated our speech dynamics and visual delivery to a whole new level of intensity!',
-    avatarUrl: 'https://i.postimg.cc/Wz4Ddh24/benlionel.png',
-    screenshotUrl: 'https://i.postimg.cc/sD0rdK1b/benlionelreview.jpg',
-  },
   {
     id: 'rev-2',
     clientName: 'Gainz',
@@ -422,27 +336,27 @@ export const clientReviews: ReviewItem[] = [
     screenshotUrl: 'https://i.postimg.cc/SNthFVJp/gainzreview.jpg',
   },
   {
-    id: 'rev-3',
+    id: 'rev-6',
+    clientName: 'Adam Robinson',
+    role: 'SaaS Founder & Creator (9.4K Subs)',
+    comment: 'Incredible work, outstanding pacing, and high-retention editing style that keeps viewers hooked throughout.',
+    avatarUrl: 'https://i.ibb.co/cXkHTZyr/Adam-Robinson.png',
+    screenshotUrl: 'https://i.postimg.cc/C5HFW3wM/adamrobinsonreview.jpg',
+  },
+  {
+    id: 'rev-7',
+    clientName: 'Feasterr',
+    role: 'Gaming Creator (56.9K Subs)',
+    comment: 'The flow, retention mechanics, and pacing are perfect. Turnaround times are incredibly fast and professional.',
+    avatarUrl: 'https://i.postimg.cc/QxbVFT1Q/feasterr.jpg',
+    screenshotUrl: 'https://i.postimg.cc/KjrZd6m8/feasterreview.jpg',
+  },
+  {
+    id: 'rev-8',
     clientName: 'Stream Phoenix',
     role: 'Stream Highlights (530K Subs)',
-    comment: 'Perfect comedic timing and high-retention motion design that grabs attention from the first second.',
+    comment: 'Perfect timing, custom sound effects, and flawless engagement-driven flow in every single delivered cut.',
     avatarUrl: 'https://i.postimg.cc/vTm14cQZ/streamphoenix.png',
-    screenshotUrl: 'https://i.postimg.cc/651XJzyJ/phoenixreview.jpg',
-  },
-  {
-    id: 'rev-4',
-    clientName: 'Robbers IQ',
-    role: 'Documentary Creator (205K Subs)',
-    comment: 'The masterclass editing on our long-form documentary videos completely transformed our audience retention curve!',
-    avatarUrl: 'https://i.postimg.cc/sx2BMvVD/robbersiq.png',
-    screenshotUrl: 'https://i.postimg.cc/651XJzTk/robbersiqreview.jpg',
-  },
-  {
-    id: 'rev-5',
-    clientName: 'Conflext',
-    role: 'Commentary Creator (203K Subs)',
-    comment: 'Exceptional storytelling visual overlays and sound design. Turnaround time is incredibly fast.',
-    avatarUrl: 'https://i.postimg.cc/Qtm9NprC/conflext.png',
-    screenshotUrl: 'https://i.postimg.cc/YqyHK8hB/conflextreview.jpg',
+    screenshotUrl: 'https://i.postimg.cc/T1qRZzTd/streamphoenixreview.jpg',
   }
 ];

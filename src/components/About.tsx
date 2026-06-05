@@ -24,18 +24,14 @@ const DiscordIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
 
 export default function About({ onDiscordClick }: AboutProps) {
   return (
-    <section id="about" className="py-24 px-4 md:px-8 bg-gray-50/50 scroll-mt-20 relative overflow-hidden">
-      {/* Background soft ambient lights */}
-      <div className="absolute -top-40 right-1/3 w-80 h-80 bg-youtube/4 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-40 left-10 w-80 h-80 bg-secondary-dark/4 rounded-full blur-[100px] pointer-events-none" />
-
+    <section id="about" className="py-24 px-4 md:px-8 bg-transparent scroll-mt-20 relative overflow-hidden">
       <div className="container max-w-6xl mx-auto">
         <ScrollFadeIn delay={0}>
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-[10px] font-mono font-bold text-youtube tracking-widest uppercase bg-youtube/10 p-1 px-3.5 rounded-full inline-block mb-3.5 border border-youtube/10 select-none">
+          <div className="text-center w-full max-w-4xl mx-auto mb-16 relative px-4 flex flex-col items-center justify-center">
+            <span className="relative z-10 text-[10.5px] font-mono font-bold text-youtube tracking-widest uppercase mb-3.5 select-none md:scale-105">
               Get to know me
             </span>
-            <h2 id="about-title" className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark tracking-tight leading-none cursor-default select-none">
+            <h2 id="about-title" className="relative z-10 px-6 text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark tracking-tight leading-none cursor-default select-none">
               About Me
             </h2>
           </div>

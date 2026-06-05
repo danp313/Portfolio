@@ -74,7 +74,7 @@ export default function App() {
   };
 
   return (
-    <div id="app-root" className="min-h-screen flex flex-col justify-between selection:bg-youtube selection:text-white">
+    <div id="app-root" className="min-h-screen flex flex-col justify-between selection:bg-youtube selection:text-white relative bg-transparent">
       {/* Dynamic Navigation Bar Header with Contact Action */}
       <Header onDiscordClick={openDiscordModal} />
 

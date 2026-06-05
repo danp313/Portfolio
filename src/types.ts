@@ -8,7 +8,7 @@ export interface VideoItem {
   title: string;
   type: 'long' | 'short';
   platform: 'youtube' | 'tiktok';
-  niche: 'documentary' | 'gaming' | 'education' | 'vlog' | 'finance' | 'commentary' | 'motivational' | 'fitness' | 'streamers';
+  niche: 'documentary' | 'gaming' | 'education' | 'vlog' | 'finance' | 'commentary' | 'motivational' | 'fitness' | 'streamers' | 'business' | 'podcast' | 'cams';
   url: string;
   thumb: string;
   views?: string;

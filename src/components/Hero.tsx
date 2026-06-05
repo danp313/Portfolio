@@ -38,10 +38,6 @@ export default function Hero({ onDiscordClick }: HeroProps) {
   return (
     <section id="hero" className="relative min-h-[90vh] flex flex-col justify-center items-center px-4 md:px-8 py-20 overflow-hidden cursor-default select-none">
       
-      {/* Background visual accents */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-youtube/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-secondary-dark/5 rounded-full blur-[120px] pointer-events-none" />
-
       <div className="container max-w-6xl mx-auto flex flex-col items-center text-center relative z-10">
         
         {/* Subtle Category Badge Tag */}
