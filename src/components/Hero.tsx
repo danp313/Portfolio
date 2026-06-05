@@ -24,6 +24,61 @@ interface HeroProps {
 }
 
 export default function Hero({ onDiscordClick }: HeroProps) {
+  const tickerRef = React.useRef<HTMLDivElement>(null);
+
+  // Smooth deceleration/acceleration of WAAPI playbackRate for realistic braking physics
+  React.useEffect(() => {
+    const el = tickerRef.current;
+    if (!el) return;
+
+    let activeInterval: any = null;
+
+    const fadePlaybackRate = (target: number, duration: number) => {
+      if (activeInterval) clearInterval(activeInterval);
+
+      const animations = el.getAnimations();
+      if (animations.length === 0) return;
+
+      const animation = animations[0];
+      const startRate = animation.playbackRate ?? 1;
+      const startTime = performance.now();
+
+      activeInterval = setInterval(() => {
+        const elapsed = performance.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Braking physics: ease-out cubic curve (slowing down smoothly immediately starts)
+        const ease = target === 0 
+          ? 1 - Math.pow(1 - progress, 3) // easeOutCubic deceleration
+          : progress; // linear acceleration back to speed
+
+        const currentRate = startRate + (target - startRate) * ease;
+        animation.playbackRate = currentRate;
+
+        if (progress >= 1) {
+          clearInterval(activeInterval);
+        }
+      }, 16); // Smooth 60 FPS transitions
+    };
+
+    const handleMouseEnter = () => {
+      fadePlaybackRate(0, 450); // 450ms deceleration brake
+    };
+
+    const handleMouseLeave = () => {
+      fadePlaybackRate(1, 650); // 650ms recovery to full speed
+    };
+
+    el.addEventListener('mouseenter', handleMouseEnter);
+    el.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      if (activeInterval) clearInterval(activeInterval);
+      el.removeEventListener('mouseenter', handleMouseEnter);
+      el.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   // Mapping icons for stats list for extra visual polish
   const getIconForStat = (index: number) => {
     switch (index) {
@@ -123,34 +178,69 @@ export default function Hero({ onDiscordClick }: HeroProps) {
               <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
               
               {/* Ticker Flex container */}
-              <div id="logo-ticker-flow" className="flex w-max gap-8 md:gap-14 items-center animate-ticker">
-                {/* Render the lists twice to ensure seamless infinite looping */}
-                {[...workedWithChannels, ...workedWithChannels].map((channel, index) => (
-                  <a
-                    key={`${channel.id}-${index}`}
-                    href={channel.channelUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 transition-all duration-300 pointer-events-auto group cursor-pointer"
-                  >
-                    <div className="relative p-[2px] rounded-full border-2 border-youtube/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white">
-                      <img 
-                        src={channel.avatarUrl} 
-                        alt={channel.name} 
-                        referrerPolicy="no-referrer"
-                        className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50"
-                      /> 
-                    </div>
-                    <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark group-hover:text-youtube transition-colors mt-2 text-center truncate w-full">
-                      {channel.name}
-                    </span>
-                    {channel.subscriberCount && (
-                      <span className="text-[10px] font-mono text-gray-400 mt-0.5 text-center">
-                        {channel.subscriberCount}
+              <div 
+                id="logo-ticker-flow" 
+                ref={tickerRef} 
+                className="flex w-max items-center animate-ticker"
+              >
+                {/* Render two identical blocks for seamless infinite loop width calculation */}
+                <div className="flex gap-8 md:gap-14 items-center pr-8 md:pr-14 flex-shrink-0">
+                  {workedWithChannels.map((channel, index) => (
+                    <a
+                      key={`${channel.id}-block1-${index}`}
+                      href={channel.channelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 transition-all duration-300 pointer-events-auto group cursor-pointer"
+                    >
+                      <div className="relative p-[2px] rounded-full border-2 border-youtube/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white">
+                        <img 
+                          src={channel.avatarUrl} 
+                          alt={channel.name} 
+                          referrerPolicy="no-referrer"
+                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50"
+                        /> 
+                      </div>
+                      <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark group-hover:text-youtube transition-colors mt-2 text-center truncate w-full">
+                        {channel.name}
                       </span>
-                    )}
-                  </a>
-                ))}
+                      {channel.subscriberCount && (
+                        <span className="text-[10px] font-mono text-gray-400 mt-0.5 text-center">
+                          {channel.subscriberCount}
+                        </span>
+                      )}
+                    </a>
+                  ))}
+                </div>
+
+                <div className="flex gap-8 md:gap-14 items-center pr-8 md:pr-14 flex-shrink-0 pointer-events-auto">
+                  {workedWithChannels.map((channel, index) => (
+                    <a
+                      key={`${channel.id}-block2-${index}`}
+                      href={channel.channelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 transition-all duration-300 pointer-events-auto group cursor-pointer"
+                    >
+                      <div className="relative p-[2px] rounded-full border-2 border-youtube/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white">
+                        <img 
+                          src={channel.avatarUrl} 
+                          alt={channel.name} 
+                          referrerPolicy="no-referrer"
+                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50"
+                        /> 
+                      </div>
+                      <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark group-hover:text-youtube transition-colors mt-2 text-center truncate w-full">
+                        {channel.name}
+                      </span>
+                      {channel.subscriberCount && (
+                        <span className="text-[10px] font-mono text-gray-400 mt-0.5 text-center">
+                          {channel.subscriberCount}
+                        </span>
+                      )}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

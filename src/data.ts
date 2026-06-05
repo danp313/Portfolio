@@ -241,7 +241,7 @@ export const portfolioVideos: VideoItem[] = [
  * Key Performance Statistics
  */
 export const portfolioStats: StatItem[] = [
-  { value: '350M+', label: 'Views Generated' },
+  { value: '450M+', label: 'Views Generated' },
   { value: '40+', label: 'Happy Clients' },
   { value: '4 Years', label: 'Experience' },
   { value: '450+', label: 'Videos Edited' }
@@ -346,7 +346,7 @@ export const clientReviews: ReviewItem[] = [
   {
     id: 'rev-7',
     clientName: 'Feasterr',
-    role: 'Gaming Creator (56.9K Subs)',
+    role: 'Podcast Clips Channel (56.9K Subs)',
     comment: 'The flow, retention mechanics, and pacing are perfect. Turnaround times are incredibly fast and professional.',
     avatarUrl: 'https://i.postimg.cc/QxbVFT1Q/feasterr.jpg',
     screenshotUrl: 'https://i.postimg.cc/KjrZd6m8/feasterreview.jpg',
