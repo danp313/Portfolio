@@ -28,14 +28,14 @@
  * ============================================================================
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Copy, Check, X, MessageSquare } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
-import About from './components/About';
 import Reviews from './components/Reviews';
+import About from './components/About';
 import Footer from './components/Footer';
 
 const DiscordIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -50,26 +50,58 @@ const DiscordIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
 );
 
 export default function App() {
-  const [popupAnchor, setPopupAnchor] = useState<{ x: number; y: number; align: 'top' | 'bottom' } | null>(null);
+  const [popupState, setPopupState] = useState<{
+    x: number;
+    y: number;
+    align: 'top' | 'bottom';
+    copied: boolean;
+  } | null>(null);
+
+  // Automatically dismiss popup on scroll
+  useEffect(() => {
+    if (!popupState) return;
+
+    const handleScroll = () => {
+      setPopupState(null);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [popupState]);
 
   const openDiscordModal = (e?: React.MouseEvent) => {
     if (e && e.currentTarget) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const isTop = rect.top > window.innerHeight / 2;
-      const x = rect.left + rect.width / 2 + window.scrollX;
+      const targetEl = e.currentTarget as HTMLElement;
+      const rect = targetEl.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
       
-      // Calculate absolute document vertical coords to follow scroll
-      const y = isTop 
-        ? rect.top + window.scrollY - 10 
-        : rect.bottom + window.scrollY + 10;
-        
-      setPopupAnchor({ x, y, align: isTop ? 'top' : 'bottom' });
+      // Rule: Popup appears above the button clicked, ONLY exception is navbar button (inside header)
+      const isNavbar = !!targetEl.closest('header');
+      const align: 'top' | 'bottom' = isNavbar ? 'bottom' : 'top';
+
+      // 12px clean gap between popup and button
+      const y = align === 'top' ? rect.top - 12 : rect.bottom + 12;
+
+      setPopupState({ x: centerX, y, align, copied: false });
     } else {
-      setPopupAnchor({ 
-        x: window.innerWidth / 2 + window.scrollX, 
-        y: window.innerHeight / 2 + window.scrollY, 
-        align: 'bottom' 
+      setPopupState({ 
+        x: window.innerWidth / 2, 
+        y: 100, 
+        align: 'bottom',
+        copied: false
       });
+    }
+  };
+
+  const handleCopyDiscord = () => {
+    navigator.clipboard.writeText('@atlanticmedia');
+    if (popupState) {
+      setPopupState({ ...popupState, copied: true });
+      setTimeout(() => {
+        setPopupState((prev) => prev ? { ...prev, copied: false } : null);
+      }, 2000);
     }
   };
 
@@ -96,41 +128,62 @@ export default function App() {
       {/* Section 4 — Footer & Quick Hire Banner Links with Contact Action */}
       <Footer onDiscordClick={openDiscordModal} />
 
-      {/* Subtle floating chatbox-shaped popover pointing at the trigger */}
+      {/* Popover centered above or below button with directional arrow indicator */}
       <AnimatePresence>
-        {popupAnchor && (
+        {popupState && (
           <>
             {/* Global transparent click-out backdrop */}
             <div 
               id="popover-click-backdrop"
               className="fixed inset-0 z-40 cursor-default bg-transparent"
-              onClick={() => setPopupAnchor(null)}
+              onClick={() => setPopupState(null)}
             />
             
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: popupAnchor.align === 'top' ? 8 : -8 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: popupAnchor.align === 'top' ? 8 : -8 }}
-              transition={{ type: "spring", damping: 18, stiffness: 350 }}
+            {/* Positioning Wrapper Anchor */}
+            <div
               style={{ 
-                left: `${popupAnchor.x}px`, 
-                top: `${popupAnchor.y}px`,
-                transform: popupAnchor.align === 'top' ? 'translate(-50%, -100%)' : 'translate(-50%, 0)',
+                position: 'fixed',
+                left: `${popupState.x}px`, 
+                top: `${popupState.y}px`,
+                transform: popupState.align === 'top' ? 'translate(-50%, -100%)' : 'translate(-50%, 0%)',
               }}
-              className="absolute z-50 bg-secondary-dark text-white rounded-xl py-2 px-3.5 shadow-xl border border-white/10 flex items-center gap-2 select-text pointer-events-auto cursor-default shadow-youtube/10"
+              className="z-50 pointer-events-none"
             >
-              {/* Chat-Bubble Triangular Arrow */}
-              {popupAnchor.align === 'top' ? (
-                <div className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-secondary-dark border-r border-b border-white/10 rotate-45" />
-              ) : (
-                <div className="absolute top-[-5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-secondary-dark border-l border-t border-white/10 rotate-45" />
-              )}
-              
-              <DiscordIcon className="w-4 h-4 text-[#5865F2] shrink-0" />
-              <div className="flex items-center gap-1.5 leading-none">
-                <span className="font-mono font-bold tracking-wide text-xs">clark.vfx</span>
-              </div>
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94, y: popupState.align === 'top' ? 6 : -6 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: popupState.align === 'top' ? 6 : -6 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                onClick={handleCopyDiscord}
+                className="pointer-events-auto bg-secondary-dark text-white rounded-xl py-2.5 px-4 shadow-2xl border border-white/10 flex items-center justify-between gap-3 select-none cursor-pointer hover:border-white/20 transition-colors shadow-youtube/10 group min-w-[230px] relative"
+              >
+                {/* Chat-Bubble Triangular Arrow pointing at button */}
+                {popupState.align === 'top' ? (
+                  <div className="absolute bottom-[-5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-secondary-dark border-r border-b border-white/10 rotate-45" />
+                ) : (
+                  <div className="absolute top-[-5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-secondary-dark border-l border-t border-white/10 rotate-45" />
+                )}
+                
+                <div className="flex items-center gap-2.5">
+                  <DiscordIcon className="w-4.5 h-4.5 text-[#5865F2] shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-mono font-bold tracking-wide text-xs sm:text-sm text-white">@atlanticmedia</span>
+                </div>
+
+                <span className="w-[72px] justify-center text-[10px] font-mono text-gray-300 bg-white/10 py-1 rounded flex items-center gap-1 group-hover:bg-white/20 transition-colors shrink-0">
+                  {popupState.copied ? (
+                    <>
+                      <Check className="w-3 h-3 text-emerald-400" />
+                      <span className="text-emerald-400 font-bold">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3 h-3 text-gray-300" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </span>
+              </motion.div>
+            </div>
           </>
         )}
       </AnimatePresence>

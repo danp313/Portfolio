@@ -36,3 +36,11 @@ export interface ReviewItem {
   avatarUrl?: string;
   screenshotUrl?: string; // Users can drop screenshots here
 }
+
+export interface ThumbnailItem {
+  id: string;
+  title: string;
+  imageUrl: string;
+  ctr?: string;
+  niche?: string;
+}

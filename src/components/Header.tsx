@@ -56,12 +56,15 @@ export default function Header({ onDiscordClick }: HeaderProps) {
       <div className="container max-w-6xl mx-auto flex items-center justify-between">
         
         {/* Brand Logo */}
-        <a href="#hero" className="flex items-center gap-2 group cursor-pointer" id="header-brand-logo">
-          <div className="w-8 h-8 bg-youtube group-hover:bg-secondary-dark rounded-lg flex items-center justify-center text-white transition-colors shadow-sm">
-            <Play className="w-4 h-4 fill-current translate-x-[1px]" />
-          </div>
-          <span className="font-extrabold text-base tracking-tight text-secondary-dark group-hover:text-youtube transition-colors uppercase">
-            Clark<span className="font-light text-gray-500">VFX</span>
+        <a href="#hero" className="flex items-center gap-3 group cursor-pointer" id="header-brand-logo">
+          <img 
+            src="https://i.ibb.co/tw1gh8kw/logo-NO-BACKGROUND.png" 
+            alt="Atlantic Media Logo" 
+            className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform duration-300" 
+            referrerPolicy="no-referrer"
+          />
+          <span className="font-extrabold text-lg sm:text-xl tracking-tight text-secondary-dark group-hover:text-youtube transition-colors uppercase">
+            Atlantic<span className="font-light text-gray-500">Media</span>
           </span>
         </a>
 

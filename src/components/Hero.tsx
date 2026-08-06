@@ -105,15 +105,22 @@ export default function Hero({ onDiscordClick }: HeroProps) {
 
         {/* Display Heading */}
         <ScrollFadeIn delay={150}>
-          <h1 id="hero-title" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-secondary-dark leading-none cursor-default select-none">
-            Video Editing <span className="text-youtube relative hover:scale-[1.04] transition-transform duration-500 ease-out inline-block cursor-default select-none">Services</span>
+          <h1 id="hero-title" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-secondary-dark leading-tight cursor-default select-none">
+            <span className="text-[#FE0500] relative hover:scale-[1.03] transition-transform duration-500 ease-out inline-block cursor-default select-none">
+              Video Editing
+            </span>{' '}
+            <span className="font-light text-gray-400">&amp;</span>
+            <br />
+            <span className="text-youtube relative hover:scale-[1.03] transition-transform duration-500 ease-out inline-block cursor-default select-none">
+              Thumbnail Design
+            </span>
           </h1>
         </ScrollFadeIn>
 
         {/* Subheading Tagline */}
         <ScrollFadeIn delay={300}>
-          <p id="hero-subtitle" className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-600 max-w-2xl font-light leading-relaxed cursor-default select-none">
-            Helping creators and brands scale their reach through high-retention, compelling video content.
+          <p id="hero-subtitle" className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl font-light leading-relaxed cursor-default select-none">
+            Helping creators and brands scale their reach with high-retention video content and high-CTR custom thumbnail design.
           </p>
         </ScrollFadeIn>
 

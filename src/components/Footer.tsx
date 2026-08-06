@@ -32,7 +32,7 @@ export default function Footer({ onDiscordClick }: FooterProps) {
         {/* Call to action contact prompt */}
         <ScrollFadeIn delay={0}>
           <div className="bg-secondary-dark p-8 sm:p-12 rounded-3xl text-white relative overflow-hidden mb-16 shadow-xl flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary-dark via-secondary-dark to-red-950/20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary-dark via-secondary-dark to-[#1754C0]/25 pointer-events-none" />
             <div className="absolute -right-16 -bottom-16 w-64 h-64 border-8 border-youtube/10 rounded-full pointer-events-none" />
             
             <div className="relative z-10 max-w-lg text-center md:text-left">
@@ -43,7 +43,7 @@ export default function Footer({ onDiscordClick }: FooterProps) {
                 Ready to take your content to the next level?
               </h3>
               <p className="text-gray-400 mt-2 text-sm sm:text-base">
-                Get high retention rates, clean sound design, and custom animations optimized for YouTube and TikTok.
+                Get high retention rates, clean sound design, eye-catching thumbnails, and custom animations optimized for YouTube and TikTok.
               </p>
             </div>
 
@@ -68,13 +68,16 @@ export default function Footer({ onDiscordClick }: FooterProps) {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-gray-100 pt-8 mt-4 text-sm text-gray-500">
           
           {/* Brand Logo / Left side */}
-          <div className="flex items-center gap-2" id="footer-brand">
-            <div className="w-8 h-8 bg-youtube rounded-lg flex items-center justify-center text-white shadow-sm hover:rotate-12 transition-transform">
-              <Play className="w-4.5 h-4.5 fill-current translate-x-[1px]" />
-            </div>
+          <div className="flex items-center gap-3" id="footer-brand">
+            <img 
+              src="https://i.ibb.co/tw1gh8kw/logo-NO-BACKGROUND.png" 
+              alt="Atlantic Media Logo" 
+              className="w-12 h-12 sm:w-14 sm:h-14 object-contain hover:rotate-6 transition-transform duration-300" 
+              referrerPolicy="no-referrer"
+            />
             <div className="flex flex-col">
-              <span className="font-extrabold text-secondary-dark tracking-tight">Clark</span>
-              <span className="text-[10px] font-mono text-gray-400">Professional Video Editor</span>
+              <span className="font-extrabold text-secondary-dark tracking-tight text-base sm:text-lg">Atlantic Media</span>
+              <span className="text-[10px] sm:text-[11px] font-mono text-gray-400">Professional Video Editing &amp; Thumbnail Design</span>
             </div>
           </div>
 
@@ -101,10 +104,10 @@ export default function Footer({ onDiscordClick }: FooterProps) {
           {/* Minimal handles & copyright */}
           <div className="flex flex-col items-center sm:items-end gap-1" id="footer-copyright">
             <span className="font-semibold text-secondary-dark font-mono">
-              @clark.vfx
+              @atlanticmedia
             </span>
             <span className="text-[11px] font-mono text-gray-400">
-              © {currentYear} Clark. All rights reserved.
+              © {currentYear} Atlantic Media. All rights reserved.
             </span>
           </div>
 

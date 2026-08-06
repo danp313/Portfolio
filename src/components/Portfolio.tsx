@@ -4,14 +4,17 @@
  */
 
 import { useState, useEffect } from 'react';
-import { portfolioVideos } from '../data';
+import { portfolioVideos, portfolioThumbnails } from '../data';
 import { VideoItem } from '../types';
-import { Play } from 'lucide-react';
+import { Play, Image as ImageIcon, X } from 'lucide-react';
 import ScrollFadeIn from './ScrollFadeIn';
 
 export default function Portfolio() {
   // State to track the currently playing video id (inline player)
   const [activePlayingId, setActivePlayingId] = useState<string | null>(null);
+  
+  // State for thumbnail modal lightbox
+  const [selectedModalImage, setSelectedModalImage] = useState<string | null>(null);
 
   // Dynamic streamable thumbnails
   const [streamableThumbs, setStreamableThumbs] = useState<Record<string, string>>({});
@@ -93,14 +96,12 @@ export default function Portfolio() {
     );
   };
 
-  const [activeFormat, setActiveFormat] = useState<'long' | 'short'>('long');
+  const [activeFormat, setActiveFormat] = useState<'short' | 'thumbnails'>('short');
 
   const currentVideos = portfolioVideos.filter((v) => v.type === activeFormat);
-  const businessVideos = currentVideos.filter((v) => v.niche === 'business');
-  const streamersVideos = currentVideos.filter((v) => v.niche === 'streamers');
   const commentaryVideos = currentVideos.filter((v) => v.niche === 'commentary');
-  const podcastVideos = currentVideos.filter((v) => v.niche === 'podcast');
   const camsVideos = currentVideos.filter((v) => v.niche === 'cams');
+  const podcastVideos = currentVideos.filter((v) => v.niche === 'podcast');
 
   const renderVideoCard = (video: VideoItem, index: number) => {
     const isLongForm = video.type === 'long';
@@ -215,95 +216,57 @@ export default function Portfolio() {
 
         {/* Format Selector Pill Buttons */}
         <ScrollFadeIn delay={80}>
-          <div className="flex justify-center items-center gap-3 mb-16 select-none">
-            <button
-              onClick={() => {
-                setActiveFormat('long');
-                setActivePlayingId(null);
-              }}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-                activeFormat === 'long'
-                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
-                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
-              }`}
-            >
-              Long Form
-            </button>
+          <div className="flex justify-center items-center gap-2.5 sm:gap-3 mb-16 select-none flex-wrap">
             <button
               onClick={() => {
                 setActiveFormat('short');
                 setActivePlayingId(null);
               }}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                 activeFormat === 'short'
                   ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
                   : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
               }`}
             >
+              <Play className="w-3.5 h-3.5 fill-current" />
               Short Form
+            </button>
+            <button
+              onClick={() => {
+                setActiveFormat('thumbnails');
+                setActivePlayingId(null);
+              }}
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                activeFormat === 'thumbnails'
+                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
+                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
+              }`}
+            >
+              <ImageIcon className="w-3.5 h-3.5" />
+              Thumbnails
             </button>
           </div>
         </ScrollFadeIn>
 
-        {activeFormat === 'long' ? (
-          <>
-            {/* Business Niche Section */}
-            <div className="mb-14">
-              <ScrollFadeIn delay={100}>
-                <div className="text-left w-full mb-6 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-youtube rounded-full" />
-                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
-                    Business
-                  </span>
-                </div>
-              </ScrollFadeIn>
-              
-              <div 
-                id="portfolio-grid-business" 
-                className="grid gap-6 items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-              >
-                {businessVideos.map((video, index) => renderVideoCard(video, index))}
-              </div>
-            </div>
-
-            {/* Streamers Niche Section */}
-            <div className="mb-6">
-              <ScrollFadeIn delay={150}>
-                <div className="text-left w-full mb-6 flex items-center gap-2">
-                  <div className="w-2 h-2 bg-youtube rounded-full animate-pulse" />
-                  <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
-                    Streamers
-                  </span>
-                </div>
-              </ScrollFadeIn>
-              
-              <div 
-                id="portfolio-grid-streamer" 
-                className="grid gap-6 items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-              >
-                {streamersVideos.map((video, index) => renderVideoCard(video, index))}
-              </div>
-            </div>
-          </>
-        ) : (
-          /* Short Form Sections Container - shrunk to ~80% width to make physical video sizes smaller */
+        {activeFormat === 'short' ? (
+          /* Short Form Sections Container */
           <div className="max-w-[920px] mx-auto">
-            {/* Podcast Niche Section */}
+            {/* Commentary Niche Section */}
             <div className="mb-14">
               <ScrollFadeIn delay={100}>
                 <div className="text-left w-full mb-6 flex items-center gap-2">
                   <div className="w-2 h-2 bg-youtube rounded-full animate-pulse" />
                   <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
-                    Podcast
+                    Commentary
                   </span>
                 </div>
               </ScrollFadeIn>
               
               <div 
-                id="portfolio-grid-podcast" 
+                id="portfolio-grid-commentary" 
                 className="grid gap-5 items-start grid-cols-2 md:grid-cols-4"
               >
-                {podcastVideos.map((video, index) => renderVideoCard(video, index))}
+                {commentaryVideos.map((video, index) => renderVideoCard(video, index))}
               </div>
             </div>
 
@@ -326,23 +289,90 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Commentary Niche Section */}
+            {/* Podcast Niche Section */}
             <div className="mb-6">
               <ScrollFadeIn delay={200}>
                 <div className="text-left w-full mb-6 flex items-center gap-2">
                   <div className="w-2 h-2 bg-youtube rounded-full" />
                   <span className="text-xs sm:text-sm font-mono font-bold text-youtube tracking-widest uppercase">
-                    Commentary
+                    Podcast
                   </span>
                 </div>
               </ScrollFadeIn>
               
               <div 
-                id="portfolio-grid-commentary" 
+                id="portfolio-grid-podcast" 
                 className="grid gap-5 items-start grid-cols-2 md:grid-cols-4"
               >
-                {commentaryVideos.map((video, index) => renderVideoCard(video, index))}
+                {podcastVideos.map((video, index) => renderVideoCard(video, index))}
               </div>
+            </div>
+          </div>
+        ) : (
+          /* Thumbnails Section */
+          <div className="w-full">
+            <div 
+              id="portfolio-grid-thumbnails" 
+              className="grid gap-6 items-start grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+            >
+              {portfolioThumbnails.map((thumbItem, index) => (
+                <ScrollFadeIn
+                  key={thumbItem.id}
+                  delay={index * 80}
+                  className="bg-transparent overflow-hidden group relative flex flex-col"
+                >
+                  <div
+                    onClick={() => setSelectedModalImage(thumbItem.imageUrl)}
+                    className="relative overflow-hidden w-full rounded-2xl bg-gray-900 border border-gray-200/10 shadow-xs cursor-pointer aspect-video"
+                  >
+                    <img
+                      src={thumbItem.imageUrl}
+                      alt={thumbItem.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      referrerPolicy="no-referrer"
+                    />
+                    {thumbItem.ctr && (
+                      <div className="absolute top-3 right-3 bg-secondary-dark/90 backdrop-blur-md text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-white/10 shadow-sm z-10">
+                        {thumbItem.ctr}
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                      <div className="w-12 h-12 bg-white/95 text-secondary-dark rounded-full flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
+                        <ImageIcon className="w-5 h-5" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-3.5 flex flex-col items-start text-left">
+                    <h3 className="font-sans font-extrabold text-secondary-dark text-base sm:text-lg leading-snug tracking-tight group-hover:text-youtube transition-colors duration-300">
+                      {thumbItem.title}
+                    </h3>
+                  </div>
+                </ScrollFadeIn>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Thumbnail Modal Lightbox */}
+        {selectedModalImage && (
+          <div 
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setSelectedModalImage(null)}
+          >
+            <div className="relative max-w-5xl w-full bg-secondary-dark p-2 rounded-2xl border border-white/10 shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+              <button
+                onClick={() => setSelectedModalImage(null)}
+                className="absolute top-4 right-4 z-10 w-9 h-9 bg-black/60 text-white hover:bg-youtube rounded-full flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <img
+                src={selectedModalImage}
+                alt="Thumbnail Preview"
+                className="w-full h-auto rounded-xl max-h-[85vh] object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
           </div>
         )}

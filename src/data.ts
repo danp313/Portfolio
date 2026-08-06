@@ -30,7 +30,7 @@
  * ==============================================================================
  */
 
-import { VideoItem, StatItem, PartnerBrand, ReviewItem } from './types';
+import { VideoItem, StatItem, PartnerBrand, ReviewItem, ThumbnailItem } from './types';
 
 /**
  * Core Video Portfolio Dataset
@@ -105,24 +105,24 @@ export const portfolioVideos: VideoItem[] = [
   },
   {
     id: 'vid-short-comm-1',
-    title: "The World's Rarest Car 🚗",
+    title: 'She Had NO IDEA What Was Going On 😂✈️',
     type: 'short',
     platform: 'youtube',
     niche: 'commentary',
-    url: 'https://streamable.com/e/4anzcv?loop=0',
+    url: 'https://streamable.com/e/4gb17x?loop=0',
     thumb: '',
     views: '4.2M views',
     duration: '0:45'
   },
   {
     id: 'vid-short-comm-2',
-    title: 'This Girl Has Created a Magnificent Invention ❤️',
+    title: 'How Soldiers Fly With Service Dogs 😱✈️',
     type: 'short',
     platform: 'youtube',
     niche: 'commentary',
-    url: 'https://streamable.com/e/fvktze?loop=0',
+    url: 'https://streamable.com/e/csyyc6?loop=0',
     thumb: '',
-    views: '2.9M views',
+    views: '3.8M views',
     duration: '0:50'
   },
   {
@@ -241,23 +241,16 @@ export const portfolioVideos: VideoItem[] = [
  * Key Performance Statistics
  */
 export const portfolioStats: StatItem[] = [
-  { value: '450M+', label: 'Views Generated' },
-  { value: '40+', label: 'Happy Clients' },
+  { value: '700M+', label: 'Views Generated' },
+  { value: '23', label: 'Happy Clients' },
   { value: '4 Years', label: 'Experience' },
-  { value: '450+', label: 'Videos Edited' }
+  { value: '1000+', label: 'Videos Edited' }
 ];
 
 /**
  * Partner Brand Channels (Automated Logo Ticker)
  */
 export const workedWithChannels: PartnerBrand[] = [
-  {
-    id: 'brand-1',
-    name: 'Dennis Brem',
-    subscriberCount: '4.7M Subs',
-    avatarUrl: 'https://i.postimg.cc/C5KZRzF1/denis.png',
-    channelUrl: 'https://www.youtube.com/@DenisBrem'
-  },
   {
     id: 'brand-3',
     name: 'Gainz',
@@ -266,11 +259,18 @@ export const workedWithChannels: PartnerBrand[] = [
     channelUrl: 'https://www.youtube.com/@GainzSanity'
   },
   {
-    id: 'brand-4',
-    name: 'Stream Phoenix',
-    subscriberCount: '530K Subs',
-    avatarUrl: 'https://i.postimg.cc/vTm14cQZ/streamphoenix.png',
-    channelUrl: 'https://www.youtube.com/@StreamPhoenix'
+    id: 'brand-farflight',
+    name: 'FarFlight',
+    subscriberCount: '241K Subs',
+    avatarUrl: 'https://i.ibb.co/hRgnnPsC/channels4-profile.jpg',
+    channelUrl: 'https://www.youtube.com/@FarFlight/shorts'
+  },
+  {
+    id: 'brand-microcrimes',
+    name: 'MicroCrimes',
+    subscriberCount: '63.4K Subs',
+    avatarUrl: 'https://i.postimg.cc/dtBDhyrG/Micro-Crimes.jpg',
+    channelUrl: 'https://www.youtube.com/@MicroCrimes'
   },
   {
     id: 'brand-feasterr',
@@ -285,41 +285,6 @@ export const workedWithChannels: PartnerBrand[] = [
     subscriberCount: '25.7K Subs',
     avatarUrl: 'https://i.postimg.cc/Hs2jryXQ/NAVYSEAL6.jpg',
     channelUrl: 'https://www.youtube.com/@navyseal6'
-  },
-  {
-    id: 'brand-microcrimes',
-    name: 'MicroCrimes',
-    subscriberCount: '63.4K Subs',
-    avatarUrl: 'https://i.postimg.cc/dtBDhyrG/Micro-Crimes.jpg',
-    channelUrl: 'https://www.youtube.com/@MicroCrimes'
-  },
-  {
-    id: 'brand-6',
-    name: 'Conflext',
-    subscriberCount: '203K Subs',
-    avatarUrl: 'https://i.postimg.cc/Qtm9NprC/conflext.png',
-    channelUrl: 'https://www.youtube.com/@ConflextOfficial'
-  },
-  {
-    id: 'brand-8',
-    name: 'Ash Maurya',
-    subscriberCount: '105K Subs',
-    avatarUrl: 'https://i.ibb.co/ZRvKpJnF/Ash-Maurya.png',
-    channelUrl: 'https://www.youtube.com/@AshMaurya'
-  },
-  {
-    id: 'brand-9',
-    name: 'Adam Robinson',
-    subscriberCount: '9.4K Subs',
-    avatarUrl: 'https://i.ibb.co/cXkHTZyr/Adam-Robinson.png',
-    channelUrl: 'https://www.youtube.com/@retentionadam'
-  },
-  {
-    id: 'brand-10',
-    name: 'Scott Leese',
-    subscriberCount: '1.22K Subs',
-    avatarUrl: 'https://i.ibb.co/pBKFbv7C/The-Scott-Leese.png',
-    channelUrl: 'https://www.youtube.com/@thescottleese'
   }
 ];
 
@@ -334,29 +299,53 @@ export const clientReviews: ReviewItem[] = [
     comment: 'Pacing, energy, and visual retention are an absolute masterclass. Easily the best editor in the fitness space!',
     avatarUrl: 'https://i.postimg.cc/d307hLqq/gainz.png',
     screenshotUrl: 'https://i.postimg.cc/SNthFVJp/gainzreview.jpg',
+  }
+];
+
+/**
+ * Thumbnail Design Portfolio Dataset
+ */
+export const portfolioThumbnails: ThumbnailItem[] = [
+  {
+    id: 'thumb-1',
+    title: '20 Years of SaaS Sales Advice in 7 Minutes',
+    imageUrl: 'https://cdn-cf-east.streamable.com/image/upload-1eiasq-4ca749bae0aa1cdf37428169242607.jpg?Expires=1780368720&Signature=W7JBg7Od47lbmQ5RSzPePcU9J5YvNjxQiF6nfkzzB~nUaFVwp5q3muJdi9uQFOpha2O~VSYHfzYFgwTg9atGemYQnLaiIhirzOY2kbsSYuIzdGCPWI27iYzf6tEgY-aS8AtlJgEMGxPkVWIuflKtau90Y0J7wuoqdY0Nt2fHGVlWb7QPIBZCzNeJHt9kDx309WGdbGoYdQ-5ZqHPTYaFrVtdTfw62-lAHJfSPE5SH5iuCDL~wyKtcjO8yx-54Pcv9s5CU7Oqj6k1nP4LWH0krf9XMofSqLfB2u6loMb~5DJary-JpfwivbINF89LMCcY~AVUb5DBO0xm9O7kBstX8A__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
+    ctr: '14.8% CTR',
+    niche: 'Business'
   },
   {
-    id: 'rev-6',
-    clientName: 'Adam Robinson',
-    role: 'SaaS Founder & Creator (9.4K Subs)',
-    comment: 'Incredible work, outstanding pacing, and high-retention editing style that keeps viewers hooked throughout.',
-    avatarUrl: 'https://i.ibb.co/cXkHTZyr/Adam-Robinson.png',
-    screenshotUrl: 'https://i.postimg.cc/C5HFW3wM/adamrobinsonreview.jpg',
+    id: 'thumb-2',
+    title: 'In 8 Minutes, You\'ll Understand Building The Best Product',
+    imageUrl: 'https://cdn-cf-east.streamable.com/image/upload-mm6br5-59770f4fc168923e72da1ecb1810f0.jpg?Expires=1780368720&Signature=RtBNgK~Uk9-MyXLyajmO3OM-y1W9ztKTPzNNyUM2u4Xf2I9pmhaqBYiCvXopCctw~KVYRkQB7bM5TniscrJCGIEqbCTXbMqi7Iyz19nigdzQ0h1XIwG9BiU8Z8ASQS6FFQ0T7~Iuc2M6UrsWMEkk9dYARDOWIFrVKrg6KrSa1IIz6DW0uveiq1g6GHH2NI2Yy~4S8x-tDnkIEBklqmB5dEExBXYullfYGBM7IwJLhPZyUgiJmhTv~sjJRYYoRvwQHYqNFJKCtmEOiBYCQvxkxVaoyE5nqr50eDD8uzsg-W-zgPsYLlJJH~PbdIrM1YgiaZ~nB1Q9t3ij8JUFw8bSkQ__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
+    ctr: '16.2% CTR',
+    niche: 'Business'
   },
   {
-    id: 'rev-7',
-    clientName: 'Feasterr',
-    role: 'Podcast Clips Channel (56.9K Subs)',
-    comment: 'The flow, retention mechanics, and pacing are perfect. Turnaround times are incredibly fast and professional.',
-    avatarUrl: 'https://i.postimg.cc/QxbVFT1Q/feasterr.jpg',
-    screenshotUrl: 'https://i.postimg.cc/KjrZd6m8/feasterreview.jpg',
+    id: 'thumb-3',
+    title: 'AI Changed SaaS (And Nobody Even Realizes)',
+    imageUrl: 'https://cdn-cf-east.streamable.com/image/upload-cdhovx-96a31696206a25a8c6fe586408994b.jpg?Expires=1780368720&Signature=DMMAY--sMd1GZ~96M6xCOKhhJJSqkW0AiEnwHlRhgHEM1~7koy2~YOU5r5ES-~sfVl7ZEyzNyMSY37QR6pql0ZztZ-vMy4DIEahlq9DMCr6g7vVqeKgJqHbgGFZ2xKO4xos2c~RpiCuie7Z9TWImYiP690ABOvg8SYfHE1YfGr2XBh~UVC~wbTG8Z66ESyfZi-~LB9dJAxwPmGNwFCmMyQoxCvPXee8WmlYdajGw7F2~qD2BFAfxLZtf0wcKGB7OfSTfYNmVS4uLFD5MQLv8CGrVvOkOpuycmXQtwzwQXOBwWuNdFAHoAzW60QA5KijMGsB9ht-iuSjLp1WRHf-kew__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
+    ctr: '15.1% CTR',
+    niche: 'Business'
   },
   {
-    id: 'rev-8',
-    clientName: 'Stream Phoenix',
-    role: 'Stream Highlights (530K Subs)',
-    comment: 'Perfect timing, custom sound effects, and flawless engagement-driven flow in every single delivered cut.',
-    avatarUrl: 'https://i.postimg.cc/vTm14cQZ/streamphoenix.png',
-    screenshotUrl: 'https://i.postimg.cc/T1qRZzTd/streamphoenixreview.jpg',
+    id: 'thumb-4',
+    title: '$1 VS $3,000,000 Things iShowSpeed Bought',
+    imageUrl: 'https://i.postimg.cc/SNthFVJp/gainzreview.jpg',
+    ctr: '18.4% CTR',
+    niche: 'Streamers'
+  },
+  {
+    id: 'thumb-5',
+    title: 'High Retention YouTube Thumbnail Packaging Concept',
+    imageUrl: 'https://i.postimg.cc/KjrZd6m8/feasterreview.jpg',
+    ctr: '13.9% CTR',
+    niche: 'Podcast'
+  },
+  {
+    id: 'thumb-6',
+    title: 'Streamer Highlights High CTR Custom Thumbnail',
+    imageUrl: 'https://i.postimg.cc/T1qRZzTd/streamphoenixreview.jpg',
+    ctr: '17.3% CTR',
+    niche: 'Streamers'
   }
 ];

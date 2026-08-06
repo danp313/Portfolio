@@ -8,7 +8,7 @@ import { MapPin } from 'lucide-react';
 import ScrollFadeIn from './ScrollFadeIn';
 
 interface AboutProps {
-  onDiscordClick: () => void;
+  onDiscordClick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const DiscordIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
@@ -52,7 +52,7 @@ export default function About({ onDiscordClick }: AboutProps) {
                     <img
                       id="about-setup-image"
                       src="https://i.postimg.cc/fby54jt2/setup1.jpg"
-                      alt="Clark's PC Setup Workstation"
+                      alt="Atlantic Media PC Setup Workstation"
                       className="w-full h-full object-cover group-hover/setup:scale-[1.03] transition-transform duration-700 ease-out"
                       referrerPolicy="no-referrer"
                     />
@@ -67,7 +67,7 @@ export default function About({ onDiscordClick }: AboutProps) {
                   <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-mono">
                     <div className="flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-youtube" />
-                      <span>Remote Editor Studio</span>
+                      <span>South Dakota, USA</span>
                     </div>
                     <span>4k UHD Rig</span>
                   </div>
@@ -83,24 +83,31 @@ export default function About({ onDiscordClick }: AboutProps) {
                 
                 {/* Bold intro paragraph */}
                 <p className="text-lg sm:text-xl font-extrabold text-secondary-dark leading-snug tracking-tight">
-                  Hey, I’m Clark — a video editor with <span className="text-youtube">4 years of experience</span> working with creators and channels totaling over <span className="border-b-2 border-youtube/30">5 million subscribers</span> and generating more than <span className="border-b-2 border-youtube/30">450 million views</span>.
+                  I’m the solo founder of <span className="text-youtube">Atlantic Media</span> — specializing in high-performance <span className="text-youtube">video editing &amp; thumbnail design</span> with <span className="text-youtube">4 years of experience</span> working with creators and channels totaling over <span className="border-b-2 border-youtube/30">5 million subscribers</span> and generating more than <span className="border-b-2 border-youtube/30">700 million views</span>.
                 </p>
 
                 {/* Additional detailed paragraphs */}
                 <p>
-                  Originally from Massachusetts, USA, I’m currently living in Brazil and working with clients worldwide. I focus on creating high-retention, unique editing styles tailored specifically to each creator instead of using the same formula on every project.
+                  Living in South Dakota, USA, I work with clients worldwide. I focus on creating high-retention video edits and eye-catching thumbnail packaging tailored specifically to each creator instead of using the same formula on every project.
                 </p>
 
                 <p>
                   I’m a strong long-term partner for creators looking for consistency, fast communication, and someone who genuinely cares about improving content performance over time.
                 </p>
 
-                {/* Simplified Discord contact indicator */}
+                {/* Discord contact button */}
                 <div className="pt-6 border-t border-gray-150 mt-8">
-                  <div className="inline-flex items-center gap-2.5 bg-[#5865F2]/10 text-[#5865F2] px-4 py-2.5 rounded-xl border border-[#5865F2]/10">
-                    <DiscordIcon className="w-5 h-5 shrink-0" />
-                    <span className="font-mono font-bold tracking-wide text-sm">clark.vfx</span>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onDiscordClick(e);
+                    }}
+                    className="inline-flex items-center gap-2.5 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 text-[#5865F2] px-4 py-2.5 rounded-xl border border-[#5865F2]/20 transition-all cursor-pointer group/discord"
+                  >
+                    <DiscordIcon className="w-5 h-5 shrink-0 group-hover/discord:scale-110 transition-transform" />
+                    <span className="font-mono font-bold tracking-wide text-sm">@atlanticmedia</span>
+                  </button>
                 </div>
 
               </div>
