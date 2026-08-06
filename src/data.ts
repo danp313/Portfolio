@@ -291,16 +291,7 @@ export const workedWithChannels: PartnerBrand[] = [
 /**
  * Client Testimonials & Feedback Screenshots
  */
-export const clientReviews: ReviewItem[] = [
-  {
-    id: 'rev-2',
-    clientName: 'Gainz',
-    role: 'Fitness Creator (1.52M Subs)',
-    comment: 'Pacing, energy, and visual retention are an absolute masterclass. Easily the best editor in the fitness space!',
-    avatarUrl: 'https://i.postimg.cc/d307hLqq/gainz.png',
-    screenshotUrl: 'https://i.postimg.cc/SNthFVJp/gainzreview.jpg',
-  }
-];
+export const clientReviews: ReviewItem[] = [];
 
 /**
  * Thumbnail Design Portfolio Dataset
@@ -308,44 +299,77 @@ export const clientReviews: ReviewItem[] = [
 export const portfolioThumbnails: ThumbnailItem[] = [
   {
     id: 'thumb-1',
-    title: '20 Years of SaaS Sales Advice in 7 Minutes',
-    imageUrl: 'https://cdn-cf-east.streamable.com/image/upload-1eiasq-4ca749bae0aa1cdf37428169242607.jpg?Expires=1780368720&Signature=W7JBg7Od47lbmQ5RSzPePcU9J5YvNjxQiF6nfkzzB~nUaFVwp5q3muJdi9uQFOpha2O~VSYHfzYFgwTg9atGemYQnLaiIhirzOY2kbsSYuIzdGCPWI27iYzf6tEgY-aS8AtlJgEMGxPkVWIuflKtau90Y0J7wuoqdY0Nt2fHGVlWb7QPIBZCzNeJHt9kDx309WGdbGoYdQ-5ZqHPTYaFrVtdTfw62-lAHJfSPE5SH5iuCDL~wyKtcjO8yx-54Pcv9s5CU7Oqj6k1nP4LWH0krf9XMofSqLfB2u6loMb~5DJary-JpfwivbINF89LMCcY~AVUb5DBO0xm9O7kBstX8A__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
-    ctr: '14.8% CTR',
-    niche: 'Business'
+    title: '',
+    imageUrl: 'https://i.ibb.co/Gv62jMZc/Screenshot-2026-08-06-at-09-11-04.png'
   },
   {
     id: 'thumb-2',
-    title: 'In 8 Minutes, You\'ll Understand Building The Best Product',
-    imageUrl: 'https://cdn-cf-east.streamable.com/image/upload-mm6br5-59770f4fc168923e72da1ecb1810f0.jpg?Expires=1780368720&Signature=RtBNgK~Uk9-MyXLyajmO3OM-y1W9ztKTPzNNyUM2u4Xf2I9pmhaqBYiCvXopCctw~KVYRkQB7bM5TniscrJCGIEqbCTXbMqi7Iyz19nigdzQ0h1XIwG9BiU8Z8ASQS6FFQ0T7~Iuc2M6UrsWMEkk9dYARDOWIFrVKrg6KrSa1IIz6DW0uveiq1g6GHH2NI2Yy~4S8x-tDnkIEBklqmB5dEExBXYullfYGBM7IwJLhPZyUgiJmhTv~sjJRYYoRvwQHYqNFJKCtmEOiBYCQvxkxVaoyE5nqr50eDD8uzsg-W-zgPsYLlJJH~PbdIrM1YgiaZ~nB1Q9t3ij8JUFw8bSkQ__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
-    ctr: '16.2% CTR',
-    niche: 'Business'
+    title: '',
+    imageUrl: 'https://i.ibb.co/4n7S21TG/Screenshot-2026-08-06-at-09-11-35.png'
   },
   {
     id: 'thumb-3',
-    title: 'AI Changed SaaS (And Nobody Even Realizes)',
-    imageUrl: 'https://cdn-cf-east.streamable.com/image/upload-cdhovx-96a31696206a25a8c6fe586408994b.jpg?Expires=1780368720&Signature=DMMAY--sMd1GZ~96M6xCOKhhJJSqkW0AiEnwHlRhgHEM1~7koy2~YOU5r5ES-~sfVl7ZEyzNyMSY37QR6pql0ZztZ-vMy4DIEahlq9DMCr6g7vVqeKgJqHbgGFZ2xKO4xos2c~RpiCuie7Z9TWImYiP690ABOvg8SYfHE1YfGr2XBh~UVC~wbTG8Z66ESyfZi-~LB9dJAxwPmGNwFCmMyQoxCvPXee8WmlYdajGw7F2~qD2BFAfxLZtf0wcKGB7OfSTfYNmVS4uLFD5MQLv8CGrVvOkOpuycmXQtwzwQXOBwWuNdFAHoAzW60QA5KijMGsB9ht-iuSjLp1WRHf-kew__&Key-Pair-Id=APKAIEYUVEN4EVB2OKEQ',
-    ctr: '15.1% CTR',
-    niche: 'Business'
+    title: '',
+    imageUrl: 'https://i.ibb.co/p6mFKjyq/Screenshot-2026-08-06-at-09-12-23.png'
   },
   {
     id: 'thumb-4',
-    title: '$1 VS $3,000,000 Things iShowSpeed Bought',
-    imageUrl: 'https://i.postimg.cc/SNthFVJp/gainzreview.jpg',
-    ctr: '18.4% CTR',
-    niche: 'Streamers'
+    title: '',
+    imageUrl: 'https://i.ibb.co/XkdYxWCK/Screenshot-2026-08-06-at-09-12-48.png'
   },
   {
     id: 'thumb-5',
-    title: 'High Retention YouTube Thumbnail Packaging Concept',
-    imageUrl: 'https://i.postimg.cc/KjrZd6m8/feasterreview.jpg',
-    ctr: '13.9% CTR',
-    niche: 'Podcast'
+    title: '',
+    imageUrl: 'https://i.ibb.co/NDCYG76/Screenshot-2026-08-06-at-09-13-18.png'
   },
   {
     id: 'thumb-6',
-    title: 'Streamer Highlights High CTR Custom Thumbnail',
-    imageUrl: 'https://i.postimg.cc/T1qRZzTd/streamphoenixreview.jpg',
-    ctr: '17.3% CTR',
-    niche: 'Streamers'
+    title: '',
+    imageUrl: 'https://i.ibb.co/J1F9Y3b/Screenshot-2026-08-06-at-09-14-20.png'
+  },
+  {
+    id: 'thumb-7',
+    title: '',
+    imageUrl: 'https://i.ibb.co/xK95rRRD/Screenshot-2026-08-06-at-09-15-12.png'
+  },
+  {
+    id: 'thumb-8',
+    title: '',
+    imageUrl: 'https://i.ibb.co/Y4NH3XQb/Screenshot-2026-08-06-at-09-15-25.png'
+  },
+  {
+    id: 'thumb-9',
+    title: '',
+    imageUrl: 'https://i.ibb.co/XktCfbQ4/Screenshot-2026-08-06-at-09-15-44.png'
+  },
+  {
+    id: 'thumb-10',
+    title: '',
+    imageUrl: 'https://i.ibb.co/8g2QjxG1/Screenshot-2026-08-06-at-09-16-56.png'
+  },
+  {
+    id: 'thumb-11',
+    title: '',
+    imageUrl: 'https://i.ibb.co/84sw7Y5X/Screenshot-2026-08-06-at-09-17-18.png'
+  },
+  {
+    id: 'thumb-12',
+    title: '',
+    imageUrl: 'https://i.ibb.co/kVg8DFC6/Screenshot-2026-08-06-at-09-18-15.png'
+  },
+  {
+    id: 'thumb-13',
+    title: '',
+    imageUrl: 'https://i.ibb.co/5grK30Qj/Screenshot-2026-08-06-at-09-18-41.png'
+  },
+  {
+    id: 'thumb-14',
+    title: '',
+    imageUrl: 'https://i.ibb.co/x8z0VFhZ/Screenshot-2026-08-06-at-09-21-31.png'
+  },
+  {
+    id: 'thumb-15',
+    title: '',
+    imageUrl: 'https://i.ibb.co/9HjNkYbN/Screenshot-2026-08-06-at-09-22-07.png'
   }
 ];

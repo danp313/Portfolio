@@ -34,8 +34,8 @@ import { Copy, Check, X, MessageSquare } from 'lucide-react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
-import Reviews from './components/Reviews';
 import About from './components/About';
+import Reviews from './components/Reviews';
 import Footer from './components/Footer';
 
 const DiscordIcon = ({ className = "w-6 h-6" }: { className?: string }) => (

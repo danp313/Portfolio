@@ -96,7 +96,7 @@ export default function Portfolio() {
     );
   };
 
-  const [activeFormat, setActiveFormat] = useState<'short' | 'thumbnails'>('short');
+  const [activeFormat, setActiveFormat] = useState<'thumbnails' | 'short'>('thumbnails');
 
   const currentVideos = portfolioVideos.filter((v) => v.type === activeFormat);
   const commentaryVideos = currentVideos.filter((v) => v.niche === 'commentary');
@@ -219,20 +219,6 @@ export default function Portfolio() {
           <div className="flex justify-center items-center gap-2.5 sm:gap-3 mb-16 select-none flex-wrap">
             <button
               onClick={() => {
-                setActiveFormat('short');
-                setActivePlayingId(null);
-              }}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
-                activeFormat === 'short'
-                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
-                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
-              }`}
-            >
-              <Play className="w-3.5 h-3.5 fill-current" />
-              Short Form
-            </button>
-            <button
-              onClick={() => {
                 setActiveFormat('thumbnails');
                 setActivePlayingId(null);
               }}
@@ -244,6 +230,20 @@ export default function Portfolio() {
             >
               <ImageIcon className="w-3.5 h-3.5" />
               Thumbnails
+            </button>
+            <button
+              onClick={() => {
+                setActiveFormat('short');
+                setActivePlayingId(null);
+              }}
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                activeFormat === 'short'
+                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
+                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
+              }`}
+            >
+              <Play className="w-3.5 h-3.5 fill-current" />
+              Short Form
             </button>
           </div>
         </ScrollFadeIn>
@@ -310,6 +310,7 @@ export default function Portfolio() {
           </div>
         ) : (
           /* Thumbnails Section */
+          /* Thumbnails Section */
           <div className="w-full">
             <div 
               id="portfolio-grid-thumbnails" 
@@ -318,35 +319,24 @@ export default function Portfolio() {
               {portfolioThumbnails.map((thumbItem, index) => (
                 <ScrollFadeIn
                   key={thumbItem.id}
-                  delay={index * 80}
+                  delay={index * 60}
                   className="bg-transparent overflow-hidden group relative flex flex-col"
                 >
                   <div
                     onClick={() => setSelectedModalImage(thumbItem.imageUrl)}
-                    className="relative overflow-hidden w-full rounded-2xl bg-gray-900 border border-gray-200/10 shadow-xs cursor-pointer aspect-video"
+                    className="relative overflow-hidden w-full rounded-2xl bg-gray-900 border border-gray-200/10 shadow-sm cursor-pointer aspect-video"
                   >
                     <img
                       src={thumbItem.imageUrl}
-                      alt={thumbItem.title}
+                      alt="Thumbnail Design"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    {thumbItem.ctr && (
-                      <div className="absolute top-3 right-3 bg-secondary-dark/90 backdrop-blur-md text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border border-white/10 shadow-sm z-10">
-                        {thumbItem.ctr}
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
-                      <div className="w-12 h-12 bg-white/95 text-secondary-dark rounded-full flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
-                        <ImageIcon className="w-5 h-5" />
-                      </div>
+                    <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                      <span className="text-white font-sans font-bold text-sm sm:text-base tracking-wide transform translate-y-1 group-hover:translate-y-0 transition-all duration-300 drop-shadow-md">
+                        click to expand
+                      </span>
                     </div>
-                  </div>
-
-                  <div className="mt-3.5 flex flex-col items-start text-left">
-                    <h3 className="font-sans font-extrabold text-secondary-dark text-base sm:text-lg leading-snug tracking-tight group-hover:text-youtube transition-colors duration-300">
-                      {thumbItem.title}
-                    </h3>
                   </div>
                 </ScrollFadeIn>
               ))}
@@ -357,20 +347,24 @@ export default function Portfolio() {
         {/* Thumbnail Modal Lightbox */}
         {selectedModalImage && (
           <div 
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 sm:p-6"
             onClick={() => setSelectedModalImage(null)}
           >
-            <div className="relative max-w-5xl w-full bg-secondary-dark p-2 rounded-2xl border border-white/10 shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div 
+              className="relative max-w-5xl w-full bg-secondary-dark p-2 rounded-2xl border border-white/15 shadow-2xl overflow-hidden aspect-video flex items-center justify-center" 
+              onClick={(e) => e.stopPropagation()}
+            >
               <button
                 onClick={() => setSelectedModalImage(null)}
-                className="absolute top-4 right-4 z-10 w-9 h-9 bg-black/60 text-white hover:bg-youtube rounded-full flex items-center justify-center transition-colors cursor-pointer"
+                className="absolute top-4 right-4 z-20 w-9 h-9 bg-black/70 text-white hover:bg-youtube rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg"
+                aria-label="Close preview"
               >
                 <X className="w-5 h-5" />
               </button>
               <img
                 src={selectedModalImage}
                 alt="Thumbnail Preview"
-                className="w-full h-auto rounded-xl max-h-[85vh] object-contain"
+                className="w-full h-full object-cover rounded-xl"
                 referrerPolicy="no-referrer"
               />
             </div>
