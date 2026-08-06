@@ -97,21 +97,22 @@ export default function Hero({ onDiscordClick }: HeroProps) {
         
         {/* Subtle Category Badge Tag */}
         <ScrollFadeIn delay={0}>
-          <div id="hero-badge" className="inline-flex items-center gap-2 bg-secondary-dark/5 border border-secondary-dark/10 px-4 py-1.5 rounded-full mb-6 cursor-default select-none">
+          <div id="hero-badge" className="inline-flex items-center gap-2 bg-secondary-dark/5 dark:bg-white/10 border border-secondary-dark/10 dark:border-white/15 px-4 py-1.5 rounded-full mb-6 cursor-default select-none">
             <span className="w-2 h-2 bg-youtube rounded-full animate-ping" />
-            <span className="text-xs font-mono tracking-wider text-secondary-dark uppercase font-semibold">Available for Freelance & Contract</span>
+            <span className="text-xs font-mono tracking-wider text-secondary-dark dark:text-gray-200 uppercase font-semibold">Available for Freelance & Contract</span>
           </div>
         </ScrollFadeIn>
 
         {/* Display Heading */}
         <ScrollFadeIn delay={150}>
-          <h1 id="hero-title" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-secondary-dark leading-tight cursor-default select-none">
-            <span className="text-[#FE0500] relative hover:scale-[1.03] transition-transform duration-500 ease-out inline-block cursor-default select-none">
-              Video Editing
-            </span>{' '}
-            <span className="font-light text-gray-400">&amp;</span>
-            <br />
-            <span className="text-youtube relative hover:scale-[1.03] transition-transform duration-500 ease-out inline-block cursor-default select-none">
+          <h1 id="hero-title" className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight text-secondary-dark dark:text-white leading-tight cursor-default select-none flex flex-col items-center">
+            <span className="block whitespace-nowrap">
+              <span className="text-[#FE0500] relative hover:scale-[1.03] transition-transform duration-500 ease-out inline-block cursor-default select-none">
+                Video Editing
+              </span>{' '}
+              <span className="font-light text-gray-400 dark:text-gray-500">&amp;</span>
+            </span>
+            <span className="block whitespace-nowrap text-youtube dark:text-blue-400 relative hover:scale-[1.03] transition-transform duration-500 ease-out cursor-default select-none">
               Thumbnail Design
             </span>
           </h1>
@@ -119,7 +120,7 @@ export default function Hero({ onDiscordClick }: HeroProps) {
 
         {/* Subheading Tagline */}
         <ScrollFadeIn delay={300}>
-          <p id="hero-subtitle" className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-600 max-w-3xl font-light leading-relaxed cursor-default select-none">
+          <p id="hero-subtitle" className="mt-6 text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl font-light leading-relaxed cursor-default select-none">
             Helping creators and brands scale their reach with high-retention video content and high-CTR custom thumbnail design.
           </p>
         </ScrollFadeIn>
@@ -130,7 +131,7 @@ export default function Hero({ onDiscordClick }: HeroProps) {
             <a
               id="cta-work"
               href="#portfolio"
-              className="px-8 py-4 bg-secondary-dark hover:bg-youtube text-white font-medium rounded-lg shadow-lg hover:shadow-youtube/20 transition-all duration-300 flex items-center gap-2.5 group cursor-pointer"
+              className="px-8 py-4 bg-secondary-dark dark:bg-white dark:text-black hover:bg-youtube dark:hover:bg-blue-400 dark:hover:text-white text-white font-medium rounded-lg shadow-lg hover:shadow-youtube/20 transition-all duration-300 flex items-center gap-2.5 group cursor-pointer"
             >
               <Play className="w-4 h-4 fill-current group-hover:rotate-12 transition-transform duration-300" />
               View My Work
@@ -141,7 +142,7 @@ export default function Hero({ onDiscordClick }: HeroProps) {
                 e.preventDefault();
                 onDiscordClick(e);
               }}
-              className="px-8 py-4 bg-white/85 hover:bg-white text-secondary-dark border border-gray-200 hover:border-gray-300 font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center gap-2.5 group cursor-pointer"
+              className="px-8 py-4 bg-white/85 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 text-secondary-dark dark:text-white border border-gray-200 dark:border-white/15 hover:border-gray-300 dark:hover:border-white/25 font-medium rounded-lg shadow-sm transition-all duration-300 flex items-center gap-2.5 group cursor-pointer"
             >
               <DiscordIcon className="w-5 h-5 text-[#5865F2] group-hover:scale-110 transition-transform duration-300" />
               Connect on Discord
@@ -151,20 +152,20 @@ export default function Hero({ onDiscordClick }: HeroProps) {
 
         {/* Stats Strip Component */}
         <ScrollFadeIn delay={600} className="w-full mt-20">
-          <div id="hero-stats" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 bg-white/60 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-sm border border-white">
+          <div id="hero-stats" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 bg-white/60 dark:bg-white/5 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-sm border border-white dark:border-white/10">
             {portfolioStats.map((stat, idx) => (
               <div
                 id={`stat-card-${idx}`}
                 key={stat.label}
                 className="flex flex-col items-center text-center p-3 sm:p-4 hover:scale-[1.04] transition-transform duration-500 ease-out cursor-default select-none"
               >
-                <div className="p-2.5 bg-youtube/5 rounded-xl mb-3">
+                <div className="p-2.5 bg-youtube/5 dark:bg-white/10 rounded-xl mb-3">
                   {getIconForStat(idx)}
                 </div>
-                <span id={`stat-val-${idx}`} className="text-3xl sm:text-4xl font-extrabold text-youtube tracking-tight cursor-default select-none">
+                <span id={`stat-val-${idx}`} className="text-3xl sm:text-4xl font-extrabold text-youtube dark:text-blue-400 tracking-tight cursor-default select-none">
                   {stat.value}
                 </span>
-                <span id={`stat-label-${idx}`} className="mt-1.5 text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wider cursor-default select-none">
+                <span id={`stat-label-${idx}`} className="mt-1.5 text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-default select-none">
                   {stat.label}
                 </span>
               </div>
@@ -175,14 +176,18 @@ export default function Hero({ onDiscordClick }: HeroProps) {
         {/* Logo Ticker / Channels Carousel segment */}
         <ScrollFadeIn delay={750} className="w-full mt-24">
           <div className="w-full flex flex-col items-center">
-            <span id="ticker-label" className="text-xs font-mono font-bold text-gray-400 uppercase tracking-widest mb-6">
+            <span id="ticker-label" className="text-xs font-mono font-bold text-gray-400 dark:text-gray-400 uppercase tracking-widest mb-6">
               Channels I've Worked With
             </span>
             
-            {/* Ticker Outer Container with absolute masks for smooth fading edges */}
-            <div className="relative w-full overflow-hidden py-4 bg-white/40 backdrop-blur-sm rounded-xl border border-gray-100/50">
-              <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+            {/* Ticker Outer Container with smooth alpha edge mask */}
+            <div 
+              className="relative w-full overflow-hidden py-4 bg-white/40 dark:bg-white/5 backdrop-blur-sm rounded-xl border border-gray-100/50 dark:border-white/10"
+              style={{
+                maskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%)'
+              }}
+            >
               
               {/* Ticker Flex container */}
               <div 
@@ -198,21 +203,21 @@ export default function Hero({ onDiscordClick }: HeroProps) {
                       href={channel.channelUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 transition-all duration-300 pointer-events-auto group cursor-pointer"
+                      className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300 pointer-events-auto group cursor-pointer"
                     >
-                      <div className="relative p-[2px] rounded-full border-2 border-youtube/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white">
+                      <div className="relative p-[2px] rounded-full border-2 border-youtube/20 dark:border-white/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white dark:bg-gray-800">
                         <img 
                           src={channel.avatarUrl} 
                           alt={channel.name} 
                           referrerPolicy="no-referrer"
-                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50"
+                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50 dark:bg-gray-900"
                         /> 
                       </div>
-                      <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark group-hover:text-youtube transition-colors mt-2 text-center truncate w-full">
+                      <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark dark:text-gray-200 group-hover:text-youtube dark:group-hover:text-blue-400 transition-colors mt-2 text-center truncate w-full">
                         {channel.name}
                       </span>
                       {channel.subscriberCount && (
-                        <span className="text-[10px] font-mono text-gray-400 mt-0.5 text-center">
+                        <span className="text-[10px] font-mono text-gray-400 dark:text-gray-400 mt-0.5 text-center">
                           {channel.subscriberCount}
                         </span>
                       )}
@@ -227,21 +232,21 @@ export default function Hero({ onDiscordClick }: HeroProps) {
                       href={channel.channelUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 transition-all duration-300 pointer-events-auto group cursor-pointer"
+                      className="flex-shrink-0 w-28 md:w-36 flex flex-col items-center justify-center p-2 rounded-xl hover:bg-white/50 dark:hover:bg-white/10 transition-all duration-300 pointer-events-auto group cursor-pointer"
                     >
-                      <div className="relative p-[2px] rounded-full border-2 border-youtube/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white">
+                      <div className="relative p-[2px] rounded-full border-2 border-youtube/20 dark:border-white/20 group-hover:border-youtube transition-colors duration-500 shadow-sm bg-white dark:bg-gray-800">
                         <img 
                           src={channel.avatarUrl} 
                           alt={channel.name} 
                           referrerPolicy="no-referrer"
-                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50"
+                          className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover group-hover:scale-105 transition-transform duration-500 bg-gray-50 dark:bg-gray-900"
                         /> 
                       </div>
-                      <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark group-hover:text-youtube transition-colors mt-2 text-center truncate w-full">
+                      <span className="font-sans font-bold text-xs sm:text-xs md:text-sm text-secondary-dark dark:text-gray-200 group-hover:text-youtube dark:group-hover:text-blue-400 transition-colors mt-2 text-center truncate w-full">
                         {channel.name}
                       </span>
                       {channel.subscriberCount && (
-                        <span className="text-[10px] font-mono text-gray-400 mt-0.5 text-center">
+                        <span className="text-[10px] font-mono text-gray-400 dark:text-gray-400 mt-0.5 text-center">
                           {channel.subscriberCount}
                         </span>
                       )}

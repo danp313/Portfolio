@@ -31,8 +31,8 @@ export default function Footer({ onDiscordClick }: FooterProps) {
         
         {/* Call to action contact prompt */}
         <ScrollFadeIn delay={0}>
-          <div className="bg-secondary-dark p-8 sm:p-12 rounded-3xl text-white relative overflow-hidden mb-16 shadow-xl flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary-dark via-secondary-dark to-[#1754C0]/25 pointer-events-none" />
+          <div className="bg-secondary-dark dark:bg-[#161B26] p-8 sm:p-12 rounded-3xl text-white relative overflow-hidden mb-16 shadow-xl flex flex-col md:flex-row justify-between items-center gap-8 border border-transparent dark:border-white/10">
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary-dark dark:from-[#161B26] via-secondary-dark dark:via-[#161B26] to-[#1754C0]/25 pointer-events-none" />
             <div className="absolute -right-16 -bottom-16 w-64 h-64 border-8 border-youtube/10 rounded-full pointer-events-none" />
             
             <div className="relative z-10 max-w-lg text-center md:text-left">
@@ -65,7 +65,7 @@ export default function Footer({ onDiscordClick }: FooterProps) {
         </ScrollFadeIn>
 
         {/* Minimal Footer Row */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-gray-100 pt-8 mt-4 text-sm text-gray-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-gray-100 dark:border-white/10 pt-8 mt-4 text-sm text-gray-500">
           
           {/* Brand Logo / Left side */}
           <div className="flex items-center gap-3" id="footer-brand">
@@ -76,7 +76,7 @@ export default function Footer({ onDiscordClick }: FooterProps) {
               referrerPolicy="no-referrer"
             />
             <div className="flex flex-col">
-              <span className="font-extrabold text-secondary-dark tracking-tight text-base sm:text-lg">Atlantic Media</span>
+              <span className="font-extrabold text-secondary-dark dark:text-white tracking-tight text-base sm:text-lg">Atlantic Media</span>
               <span className="text-[10px] sm:text-[11px] font-mono text-gray-400">Professional Video Editing &amp; Thumbnail Design</span>
             </div>
           </div>
@@ -88,22 +88,22 @@ export default function Footer({ onDiscordClick }: FooterProps) {
                 e.preventDefault();
                 onDiscordClick(e);
               }}
-              className="p-2 text-gray-400 hover:text-indigo-500 transition-colors rounded-full hover:bg-gray-50 cursor-pointer border-none bg-transparent"
+              className="p-2 text-gray-400 hover:text-indigo-500 transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-white/10 cursor-pointer border-none bg-transparent"
               aria-label="Discord Username"
             >
               <DiscordIcon className="w-4 h-4" />
             </button>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-youtube transition-colors rounded-full hover:bg-gray-55" aria-label="YouTube Channel">
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-[#FF0000] transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-white/10" aria-label="YouTube Channel">
               <Youtube className="w-4 h-4" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-pink-500 transition-colors rounded-full hover:bg-gray-55" aria-label="Instagram Profile">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="p-2 text-gray-400 hover:text-pink-500 transition-colors rounded-full hover:bg-gray-50 dark:hover:bg-white/10" aria-label="Instagram Profile">
               <Instagram className="w-4 h-4" />
             </a>
           </div>
 
           {/* Minimal handles & copyright */}
           <div className="flex flex-col items-center sm:items-end gap-1" id="footer-copyright">
-            <span className="font-semibold text-secondary-dark font-mono">
+            <span className="font-semibold text-secondary-dark dark:text-white font-mono">
               @atlanticmedia
             </span>
             <span className="text-[11px] font-mono text-gray-400">

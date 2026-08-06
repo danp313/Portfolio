@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Play, Menu, X } from 'lucide-react';
+import { Play, Menu, X, Sun, Moon } from 'lucide-react';
 
 const DiscordIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg
@@ -19,9 +19,11 @@ const DiscordIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
 
 interface HeaderProps {
   onDiscordClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  darkMode: boolean;
+  onToggleDarkMode: () => void;
 }
 
-export default function Header({ onDiscordClick }: HeaderProps) {
+export default function Header({ onDiscordClick, darkMode, onToggleDarkMode }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -40,7 +42,7 @@ export default function Header({ onDiscordClick }: HeaderProps) {
 
   const navLinks = [
     { name: 'My Work', href: '#portfolio' },
-    { name: 'Reviews', href: '#reviews' },
+    // { name: 'Reviews', href: '#reviews' }, // Hidden temporarily
     { name: 'About', href: '#about' }
   ];
 
@@ -49,7 +51,7 @@ export default function Header({ onDiscordClick }: HeaderProps) {
       id="main-header"
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ease-in-out px-4 md:px-8 py-4 border-b ${
         isScrolled
-          ? 'bg-white/80 backdrop-blur-sm shadow-xs border-gray-200/40'
+          ? 'bg-white/85 dark:bg-[#11141C]/85 backdrop-blur-md shadow-xs border-gray-200/40 dark:border-white/10'
           : 'bg-transparent border-transparent'
       }`}
     >
@@ -63,53 +65,88 @@ export default function Header({ onDiscordClick }: HeaderProps) {
             className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform duration-300" 
             referrerPolicy="no-referrer"
           />
-          <span className="font-extrabold text-lg sm:text-xl tracking-tight text-secondary-dark group-hover:text-youtube transition-colors uppercase">
-            Atlantic<span className="font-light text-gray-500">Media</span>
+          <span className="font-extrabold text-lg sm:text-xl tracking-tight text-secondary-dark dark:text-white group-hover:text-youtube transition-colors uppercase">
+            Atlantic<span className="font-light text-gray-500 dark:text-gray-400">Media</span>
           </span>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav id="desktop-nav" className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              id={`nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
-              key={link.name}
-              href={link.href}
-              className="text-xs font-mono font-bold uppercase text-gray-500 hover:text-youtube transition-colors tracking-widest relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-youtube after:transition-all hover:after:w-full"
+        {/* Desktop Navigation Links & Top-Right Actions */}
+        <div className="hidden md:flex items-center gap-8">
+          <nav id="desktop-nav" className="flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                id={`nav-link-${link.name.toLowerCase().replace(/\s+/g, '-')}`}
+                key={link.name}
+                href={link.href}
+                className="text-xs font-mono font-bold uppercase text-gray-500 dark:text-gray-300 hover:text-youtube dark:hover:text-blue-400 transition-colors tracking-widest relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-youtube after:transition-all hover:after:w-full"
+              >
+                {link.name}
+              </a>
+            ))}
+            
+            <button
+              id="nav-cta-discord"
+              onClick={(e) => {
+                e.preventDefault();
+                onDiscordClick(e);
+              }}
+              className="px-4 py-2 bg-secondary-dark dark:bg-white/10 hover:bg-youtube dark:hover:bg-youtube text-white text-xs font-bold uppercase tracking-widest font-mono rounded-lg transition-all shadow-sm flex items-center gap-2.5 cursor-pointer border border-transparent dark:border-white/10"
             >
-              {link.name}
-            </a>
-          ))}
-          
-          <button
-            id="nav-cta-discord"
-            onClick={(e) => {
-              e.preventDefault();
-              onDiscordClick(e);
-            }}
-            className="px-4 py-2 bg-secondary-dark hover:bg-youtube text-white text-xs font-bold uppercase tracking-widest font-mono rounded-lg transition-all shadow-sm flex items-center gap-2.5 cursor-pointer border border-transparent"
-          >
-            <DiscordIcon className="w-4 h-4" />
-            Discord
-          </button>
-        </nav>
+              <DiscordIcon className="w-4 h-4" />
+              Discord
+            </button>
+          </nav>
 
-        {/* Mobile menu trigger */}
-        <button
-          id="mobile-menu-trigger"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-secondary-dark hover:text-youtube transition-colors cursor-pointer"
-          aria-label="Toggle Navigation Menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+          {/* Top-Right Corner Theme Toggle Button (Desktop) */}
+          <button
+            id="theme-toggle-desktop"
+            onClick={onToggleDarkMode}
+            className="p-2.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-all cursor-pointer border border-gray-200 dark:border-white/15 flex items-center justify-center shadow-xs"
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle Theme"
+          >
+            {darkMode ? (
+              <Sun className="w-4 h-4 fill-white text-white transition-transform duration-300 hover:rotate-45" />
+            ) : (
+              <Moon className="w-4 h-4 text-gray-700 fill-gray-700 transition-transform duration-300 hover:-rotate-12" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Top-Right Actions */}
+        <div className="flex md:hidden items-center gap-3">
+          {/* Top-Right Corner Theme Toggle Button (Mobile) */}
+          <button
+            id="theme-toggle-mobile"
+            onClick={onToggleDarkMode}
+            className="p-2 rounded-full bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-all cursor-pointer border border-gray-200 dark:border-white/15 flex items-center justify-center"
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            aria-label="Toggle Theme"
+          >
+            {darkMode ? (
+              <Sun className="w-4 h-4 fill-white text-white" />
+            ) : (
+              <Moon className="w-4 h-4 text-gray-700 fill-gray-700" />
+            )}
+          </button>
+
+          {/* Mobile Menu Trigger */}
+          <button
+            id="mobile-menu-trigger"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-secondary-dark dark:text-white hover:text-youtube transition-colors cursor-pointer"
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div
           id="mobile-drawer"
-          className="md:hidden absolute top-full inset-x-0 bg-white border-b border-gray-100 shadow-lg py-6 px-4 flex flex-col gap-4 animate-fade-in-down"
+          className="md:hidden absolute top-full inset-x-0 bg-white dark:bg-[#161B26] border-b border-gray-100 dark:border-white/10 shadow-lg py-6 px-4 flex flex-col gap-4 animate-fade-in-down"
         >
           {navLinks.map((link) => (
             <a
@@ -117,7 +154,7 @@ export default function Header({ onDiscordClick }: HeaderProps) {
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-bold uppercase font-mono tracking-wider text-gray-600 hover:text-youtube py-2 px-3 hover:bg-gray-50 rounded-lg transition-all"
+              className="text-sm font-bold uppercase font-mono tracking-wider text-gray-600 dark:text-gray-300 hover:text-youtube py-2 px-3 hover:bg-gray-50 dark:hover:bg-white/5 rounded-lg transition-all"
             >
               {link.name}
             </a>
@@ -129,9 +166,10 @@ export default function Header({ onDiscordClick }: HeaderProps) {
               setMobileMenuOpen(false);
               onDiscordClick(e);
             }}
-            className="mt-2 w-full text-center py-3 bg-youtube text-white font-bold tracking-widest font-mono text-xs uppercase rounded-lg shadow-sm cursor-pointer"
+            className="mt-2 self-start px-4 py-2 bg-secondary-dark dark:bg-white/10 hover:bg-youtube dark:hover:bg-youtube text-white text-xs font-bold uppercase tracking-widest font-mono rounded-lg transition-all shadow-sm flex items-center gap-2.5 cursor-pointer border border-transparent dark:border-white/10"
           >
-            Discord DM
+            <DiscordIcon className="w-4 h-4" />
+            Discord
           </button>
         </div>
       )}

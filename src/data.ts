@@ -300,7 +300,7 @@ export const portfolioThumbnails: ThumbnailItem[] = [
   {
     id: 'thumb-1',
     title: '',
-    imageUrl: 'https://i.ibb.co/Gv62jMZc/Screenshot-2026-08-06-at-09-11-04.png'
+    imageUrl: 'https://i.ibb.co/9HjNkYbN/Screenshot-2026-08-06-at-09-22-07.png'
   },
   {
     id: 'thumb-2',
@@ -370,6 +370,6 @@ export const portfolioThumbnails: ThumbnailItem[] = [
   {
     id: 'thumb-15',
     title: '',
-    imageUrl: 'https://i.ibb.co/9HjNkYbN/Screenshot-2026-08-06-at-09-22-07.png'
+    imageUrl: 'https://i.ibb.co/Gv62jMZc/Screenshot-2026-08-06-at-09-11-04.png'
   }
 ];

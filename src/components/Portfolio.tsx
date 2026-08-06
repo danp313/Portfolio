@@ -189,7 +189,7 @@ export default function Portfolio() {
         <div className="mt-3.5 flex flex-col items-start text-left">
           <h3
             id={`video-title-${video.id}`}
-            className="font-sans font-extrabold text-secondary-dark text-base sm:text-lg md:text-xl leading-snug tracking-tight group-hover:text-youtube transition-colors duration-300"
+            className="font-sans font-extrabold text-secondary-dark dark:text-white text-base sm:text-lg md:text-xl leading-snug tracking-tight group-hover:text-youtube dark:group-hover:text-blue-400 transition-colors duration-300"
           >
             {video.title}
           </h3>
@@ -205,10 +205,10 @@ export default function Portfolio() {
         {/* Section Heading Card - Center Alignment */}
         <ScrollFadeIn delay={0}>
           <div className="flex flex-col items-center justify-center text-center mb-8 relative w-full max-w-4xl mx-auto px-4">
-            <span className="relative z-10 text-[10.5px] font-mono font-bold text-youtube tracking-widest uppercase mb-3.5 select-none md:scale-105">
+            <span className="relative z-10 text-xs sm:text-[10.5px] font-mono font-bold text-youtube tracking-widest uppercase mb-3.5 select-none md:scale-105">
               Explore Portfolio
             </span>
-            <h2 id="portfolio-title" className="relative z-10 px-6 text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark tracking-tight leading-none cursor-default select-none">
+            <h2 id="portfolio-title" className="relative z-10 px-6 text-5xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark dark:text-white tracking-tight leading-none cursor-default select-none">
               My Work
             </h2>
           </div>
@@ -224,8 +224,8 @@ export default function Portfolio() {
               }}
               className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                 activeFormat === 'thumbnails'
-                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
-                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
+                  ? 'bg-secondary-dark dark:bg-white text-white dark:text-black shadow-md shadow-secondary-dark/10'
+                  : 'bg-white dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 text-gray-500 dark:text-gray-300 border border-gray-150 dark:border-white/15 shadow-xs'
               }`}
             >
               <ImageIcon className="w-3.5 h-3.5" />
@@ -238,8 +238,8 @@ export default function Portfolio() {
               }}
               className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                 activeFormat === 'short'
-                  ? 'bg-secondary-dark text-white shadow-md shadow-secondary-dark/10'
-                  : 'bg-white hover:bg-gray-100 text-gray-500 border border-gray-150 shadow-xs'
+                  ? 'bg-secondary-dark dark:bg-white text-white dark:text-black shadow-md shadow-secondary-dark/10'
+                  : 'bg-white dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 text-gray-500 dark:text-gray-300 border border-gray-150 dark:border-white/15 shadow-xs'
               }`}
             >
               <Play className="w-3.5 h-3.5 fill-current" />

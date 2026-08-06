@@ -28,10 +28,10 @@ export default function About({ onDiscordClick }: AboutProps) {
       <div className="container max-w-6xl mx-auto">
         <ScrollFadeIn delay={0}>
           <div className="text-center w-full max-w-4xl mx-auto mb-16 relative px-4 flex flex-col items-center justify-center">
-            <span className="relative z-10 text-[10.5px] font-mono font-bold text-youtube tracking-widest uppercase mb-3.5 select-none md:scale-105">
+            <span className="relative z-10 text-xs sm:text-[10.5px] font-mono font-bold text-youtube tracking-widest uppercase mb-3.5 select-none md:scale-105">
               Get to know me
             </span>
-            <h2 id="about-title" className="relative z-10 px-6 text-4xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark tracking-tight leading-none cursor-default select-none">
+            <h2 id="about-title" className="relative z-10 px-6 text-5xl sm:text-5xl md:text-6xl font-extrabold text-secondary-dark dark:text-white tracking-tight leading-none cursor-default select-none">
               About Me
             </h2>
           </div>
@@ -44,11 +44,11 @@ export default function About({ onDiscordClick }: AboutProps) {
             <ScrollFadeIn delay={150} className="w-full max-w-[440px]">
               <div className="relative group/setup z-10">
                 {/* Background decorative solid offset grid border */}
-                <div className="absolute -inset-2 bg-gradient-to-tr from-youtube/20 to-secondary-dark/10 rounded-2xl blur-lg opacity-60 group-hover/setup:opacity-90 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute -inset-2 bg-gradient-to-tr from-youtube/20 to-secondary-dark/10 dark:to-white/10 rounded-2xl blur-lg opacity-60 group-hover/setup:opacity-90 transition-opacity duration-500 pointer-events-none" />
                 
                 {/* Image card wrapper */}
-                <div className="relative bg-white p-3 rounded-2xl border border-gray-150/80 shadow-md overflow-hidden transform group-hover/setup:scale-[1.015] transition-all duration-300">
-                  <div className="rounded-xl overflow-hidden aspect-[4/5] bg-gray-100 relative">
+                <div className="relative bg-white dark:bg-[#161B26] p-3 rounded-2xl border border-gray-150/80 dark:border-white/15 shadow-md overflow-hidden transform group-hover/setup:scale-[1.015] transition-all duration-300">
+                  <div className="rounded-xl overflow-hidden aspect-[4/5] bg-gray-100 dark:bg-gray-900 relative">
                     <img
                       id="about-setup-image"
                       src="https://i.postimg.cc/fby54jt2/setup1.jpg"
@@ -64,7 +64,7 @@ export default function About({ onDiscordClick }: AboutProps) {
                   </div>
 
                   {/* Tiny metadata rows below image */}
-                  <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500 font-mono">
+                  <div className="mt-4 pt-3 border-t border-gray-100 dark:border-white/10 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 font-mono">
                     <div className="flex items-center gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-youtube" />
                       <span>South Dakota, USA</span>
@@ -79,11 +79,11 @@ export default function About({ onDiscordClick }: AboutProps) {
           {/* Biography Text Column */}
           <div className="lg:col-span-7 flex flex-col justify-center text-left">
             <ScrollFadeIn delay={300}>
-              <div className="space-y-6 text-gray-700 text-sm sm:text-base leading-relaxed font-sans">
+              <div className="space-y-6 text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed font-sans">
                 
                 {/* Bold intro paragraph */}
-                <p className="text-lg sm:text-xl font-extrabold text-secondary-dark leading-snug tracking-tight">
-                  I’m the solo founder of <span className="text-youtube">Atlantic Media</span> — specializing in high-performance <span className="text-youtube">video editing &amp; thumbnail design</span> with <span className="text-youtube">4 years of experience</span> working with creators and channels totaling over <span className="border-b-2 border-youtube/30">5 million subscribers</span> and generating more than <span className="border-b-2 border-youtube/30">700 million views</span>.
+                <p className="text-xl sm:text-2xl font-extrabold text-secondary-dark dark:text-white leading-snug tracking-tight">
+                  I’m the solo founder of <span className="text-youtube dark:text-blue-400">Atlantic Media</span> — specializing in high-performance <span className="text-youtube dark:text-blue-400">video editing &amp; thumbnail design</span> with <span className="text-youtube dark:text-blue-400">4 years of experience</span> working with creators and channels totaling over <span className="border-b-2 border-youtube/30">5 million subscribers</span> and generating more than <span className="border-b-2 border-youtube/30">700 million views</span>.
                 </p>
 
                 {/* Additional detailed paragraphs */}
@@ -96,14 +96,14 @@ export default function About({ onDiscordClick }: AboutProps) {
                 </p>
 
                 {/* Discord contact button */}
-                <div className="pt-6 border-t border-gray-150 mt-8">
+                <div className="pt-6 border-t border-gray-150 dark:border-white/10 mt-8">
                   <button
                     type="button"
                     onClick={(e) => {
                       e.preventDefault();
                       onDiscordClick(e);
                     }}
-                    className="inline-flex items-center gap-2.5 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 text-[#5865F2] px-4 py-2.5 rounded-xl border border-[#5865F2]/20 transition-all cursor-pointer group/discord"
+                    className="inline-flex items-center gap-2.5 bg-[#5865F2]/10 hover:bg-[#5865F2]/20 text-[#5865F2] dark:text-[#7983F5] px-4 py-2.5 rounded-xl border border-[#5865F2]/20 dark:border-[#5865F2]/30 transition-all cursor-pointer group/discord"
                   >
                     <DiscordIcon className="w-5 h-5 shrink-0 group-hover/discord:scale-110 transition-transform" />
                     <span className="font-mono font-bold tracking-wide text-sm">@atlanticmedia</span>

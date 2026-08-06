@@ -35,7 +35,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
 import About from './components/About';
-import Reviews from './components/Reviews';
+// import Reviews from './components/Reviews'; // Hidden temporarily
 import Footer from './components/Footer';
 
 const DiscordIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
@@ -50,6 +50,24 @@ const DiscordIcon = ({ className = "w-6 h-6" }: { className?: string }) => (
 );
 
 export default function App() {
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved === 'dark';
+    return true; // Default to dark mode as requested
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+
   const [popupState, setPopupState] = useState<{
     x: number;
     y: number;
@@ -107,8 +125,15 @@ export default function App() {
 
   return (
     <div id="app-root" className="min-h-screen flex flex-col justify-between selection:bg-youtube selection:text-white relative bg-transparent">
+      {/* Background Grid Pattern Overlay */}
+      <div className="grid-bg-overlay" aria-hidden="true" />
+
       {/* Dynamic Navigation Bar Header with Contact Action */}
-      <Header onDiscordClick={openDiscordModal} />
+      <Header 
+        onDiscordClick={openDiscordModal} 
+        darkMode={darkMode} 
+        onToggleDarkMode={toggleDarkMode} 
+      />
 
       {/* Primary Landing Main Content */}
       <main id="main-content" className="flex-grow pt-10">
@@ -118,8 +143,8 @@ export default function App() {
         {/* Section 2 — Portfolio Work Gallery Filtering */}
         <Portfolio />
 
-        {/* Section 3 — Reviews Showcase and Screen Capture fallbacks */}
-        <Reviews />
+        {/* Section 3 — Reviews Showcase (commented out for future use) */}
+        {/* <Reviews /> */}
 
         {/* Section 3.5 — About Me with workstation PC setup */}
         <About onDiscordClick={openDiscordModal} />
