@@ -19,6 +19,16 @@ export default function Portfolio() {
   // Dynamic streamable thumbnails
   const [streamableThumbs, setStreamableThumbs] = useState<Record<string, string>>({});
 
+  // Preload all thumbnail images in the background for instant responsiveness
+  useEffect(() => {
+    portfolioThumbnails.forEach((item) => {
+      if (item.imageUrl) {
+        const img = new Image();
+        img.src = item.imageUrl;
+      }
+    });
+  }, []);
+
   // Dynamic oembed hydration for CORS-safe thumbnail retrieval
   useEffect(() => {
     portfolioVideos.forEach((video) => {
@@ -96,7 +106,7 @@ export default function Portfolio() {
     );
   };
 
-  const [activeFormat, setActiveFormat] = useState<'thumbnails' | 'short'>('thumbnails');
+  const [activeFormat, setActiveFormat] = useState<'thumbnails' | 'short'>('short');
 
   const currentVideos = portfolioVideos.filter((v) => v.type === activeFormat);
   const commentaryVideos = currentVideos.filter((v) => v.niche === 'commentary');
@@ -219,20 +229,6 @@ export default function Portfolio() {
           <div className="flex justify-center items-center gap-2.5 sm:gap-3 mb-16 select-none flex-wrap">
             <button
               onClick={() => {
-                setActiveFormat('thumbnails');
-                setActivePlayingId(null);
-              }}
-              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
-                activeFormat === 'thumbnails'
-                  ? 'bg-secondary-dark dark:bg-white text-white dark:text-black shadow-md shadow-secondary-dark/10'
-                  : 'bg-white dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 text-gray-500 dark:text-gray-300 border border-gray-150 dark:border-white/15 shadow-xs'
-              }`}
-            >
-              <ImageIcon className="w-3.5 h-3.5" />
-              Thumbnails
-            </button>
-            <button
-              onClick={() => {
                 setActiveFormat('short');
                 setActivePlayingId(null);
               }}
@@ -244,6 +240,20 @@ export default function Portfolio() {
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               Short Form
+            </button>
+            <button
+              onClick={() => {
+                setActiveFormat('thumbnails');
+                setActivePlayingId(null);
+              }}
+              className={`px-5 py-2.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                activeFormat === 'thumbnails'
+                  ? 'bg-secondary-dark dark:bg-white text-white dark:text-black shadow-md shadow-secondary-dark/10'
+                  : 'bg-white dark:bg-white/10 hover:bg-gray-100 dark:hover:bg-white/20 text-gray-500 dark:text-gray-300 border border-gray-150 dark:border-white/15 shadow-xs'
+              }`}
+            >
+              <ImageIcon className="w-3.5 h-3.5" />
+              Thumbnails
             </button>
           </div>
         </ScrollFadeIn>
@@ -331,6 +341,8 @@ export default function Portfolio() {
                       alt="Thumbnail Design"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
+                      loading="eager"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
                       <span className="text-white font-sans font-bold text-sm sm:text-base tracking-wide transform translate-y-1 group-hover:translate-y-0 transition-all duration-300 drop-shadow-md">
